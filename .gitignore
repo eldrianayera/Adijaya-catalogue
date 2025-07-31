@@ -1,0 +1,33 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+adijaya-catalogue-backend/node_modules/
+adijaya-catalogue-frontend/node_modules/
+
+# Build outputs
+dist/
+build/
+adijaya-catalogue-backend/dist/
+adijaya-catalogue-frontend/build/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables
+.env
+adijaya-catalogue-backend/.env
+adijaya-catalogue-frontend/.env
