@@ -7,7 +7,7 @@ export default function AdminProducts() {
   const handleAdd = () => {
     console.log("Add a new product");
   };
-  const handleUpdate = (id) => {
+  const handleEdit = (id) => {
     console.log("Update product", id);
   };
   const handleDelete = (id) => {
@@ -30,6 +30,8 @@ export default function AdminProducts() {
             <p>
               <em>Category: {product.category}</em>
             </p>
+            <button onClick={() => handleEdit(product.id)}>Edit</button>
+            <button onClick={() => handleDelete(product.id)}>Delete</button>
           </li>
         ))}
       </ul>
