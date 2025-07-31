@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { ProductList } from "./ProductList";
 
 function App() {
   return (
     <>
-      <h1>Hello WOrld</h1>
+      <h1>Hello World</h1>
+      <ProductList />
     </>
   );
 }
