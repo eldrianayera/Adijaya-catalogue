@@ -9,6 +9,7 @@ export default function App() {
     return <AdminLogin onLogin={setRole} />;
   }
 
+  
   // If logged in as admin or visitor, show simple message for now
   return (
     <div style={{ padding: 20 }}>
