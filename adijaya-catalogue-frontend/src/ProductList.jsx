@@ -1,16 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useState } from "react";
+import { API_BASE_URL } from "./config";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/products")
+    fetch(`${API_BASE_URL}/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
         setLoading(false);
+        console.log(data[0]);
       })
       .catch((err) => {
         console.error("Failed to fetch products:", err);
@@ -28,7 +30,7 @@ export const ProductList = () => {
         {products.map((product) => (
           <li key={product.id}>
             <h3>{product.name}</h3>
-            <p>${product.price.toFixed(2)}</p>
+            <p>${Number(product.price).toFixed(2)}</p>
             {product.image && (
               <img src={product.image} alt={product.name} width={100} />
             )}
