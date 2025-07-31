@@ -1,6 +1,5 @@
 const express = require("express");
 const pool = require("../db");
-
 const router = express.Router();
 
 // Get all products
@@ -30,7 +29,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Add a new product
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, isAuthenticated, async (req, res) => {
   try {
     const { name, price, image, description, category } = req.body;
     const result = await pool.query(
@@ -45,7 +44,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update a new product
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAdmin, isAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
     const { name, price, image, description, category } = req.body;
@@ -64,7 +63,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete a product
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAdmin, isAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query(`DELETE FROM products WHERE id=$1`, [id]);
