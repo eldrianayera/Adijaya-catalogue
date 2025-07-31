@@ -1,6 +1,7 @@
 const express = require("express");
 const pool = require("../db");
 const router = express.Router();
+const { isAdmin, isAuthenticated } = require("../middleware/auth");
 
 // Get all products
 router.get("/", async (req, res) => {
