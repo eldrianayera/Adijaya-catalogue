@@ -5,6 +5,7 @@ const { isAuthenticated, isAdmin } = require("../middleware/auth");
 
 router.use(isAuthenticated, isAdmin);
 
+// add new product
 router.post("/products", async (req, res) => {
   try {
     const { name, price, image, description, category } = req.body;
@@ -19,6 +20,7 @@ router.post("/products", async (req, res) => {
   }
 });
 
+// update product
 router.put("/products/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -37,6 +39,7 @@ router.put("/products/:id", async (req, res) => {
   }
 });
 
+//  delete product
 router.delete("/products/:id", async (req, res) => {
   try {
     const { id } = req.params;
