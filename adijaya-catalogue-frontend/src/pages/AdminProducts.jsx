@@ -20,7 +20,7 @@ export default function AdminProducts() {
       <button onClick={handleAdd}>Add Product</button>
       <ul>
         {products.map((product) => (
-          <li key={product.id}>
+          <li key={product.id} className="border-4 border-black">
             <h3>{product.name}</h3>
             <p>${Number(product.price).toFixed(2)}</p>
             {product.image && (
