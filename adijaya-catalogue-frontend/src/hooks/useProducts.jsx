@@ -1,23 +1,25 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config";
 
 export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/products`);
+      const data = res.json();
+      setProducts(data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Failed to fetch products:", err);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch(`${API_BASE_URL}/products`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch products:", err);
-        setLoading(false);
-      });
+    fetchProducts();
   }, []);
 
-  return [products, setProducts, loading];
+  return [products, setProducts, loading, fetchProducts];
 };

@@ -2,11 +2,11 @@ import { useProducts } from "../hooks/useProducts";
 import { API_BASE_URL, imgLink } from "../config";
 
 export default function AdminProducts() {
-  const [products, setProducts, loading] = useProducts();
+  const [products, setProducts, loading, fetchProducts] = useProducts();
   const token = localStorage.getItem("token");
 
   // Add new product
-  const handleAdd = async (id) => {
+  const handleAdd = async () => {
     console.log("Add a new product");
     const newProduct = {
       name: "New Product",
@@ -17,7 +17,7 @@ export default function AdminProducts() {
     };
 
     try {
-      const res = await fetch(`${API_BASE_URL}/products`, {
+      const res = await fetch(`${API_BASE_URL}/admin/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,10 +26,18 @@ export default function AdminProducts() {
         body: JSON.stringify(newProduct),
       });
 
-      if (!res.ok) throw new Error("Failed to add product:");
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to edit product: ${errorText}`);
+      }
 
       const data = await res.json();
+
+      // Instant update
       setProducts((prev) => [...prev, data]);
+
+      // Re-fetch in background
+      fetchProducts();
     } catch (err) {
       console.error(err);
     }
@@ -47,7 +55,7 @@ export default function AdminProducts() {
     };
 
     try {
-      const res = await fetch(`${API_BASE_URL}/products/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/admin/products/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -56,9 +64,18 @@ export default function AdminProducts() {
         body: JSON.stringify(editedProduct),
       });
 
-      if (!res.ok) throw new Error("Failed to edit product");
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to edit product: ${errorText}`);
+      }
+
       const data = await res.json();
+
+      // Instant update
       setProducts((prev) => prev.map((p) => (p.id === id ? data : p)));
+
+      // Re-fetch in background
+      fetchProducts();
     } catch (err) {
       console.error(err);
     }
@@ -68,12 +85,23 @@ export default function AdminProducts() {
   const handleDelete = async (id) => {
     console.log("Delete product", id);
     try {
-      const res = await fetch(`${API_BASE_URL}/products/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/admin/products/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
-      if (!res.ok) throw new Error("Failed to delete product :");
-      const data = await res.json();
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to edit product: ${errorText}`);
+      }
+
+      // Instant Update
       setProducts((prev) => prev.filter((p) => p.id !== id));
+
+      // Re-fetch in background
+      fetchProducts();
     } catch (err) {
       console.error(err);
     }
