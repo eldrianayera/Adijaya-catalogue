@@ -30,7 +30,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Get products by category
-router.get("/:category", async (req, res) => {
+router.get("/category/:category", async (req, res) => {
   try {
     const { category } = req.params;
     const result = await pool.query(

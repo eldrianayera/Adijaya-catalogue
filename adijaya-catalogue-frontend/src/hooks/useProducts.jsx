@@ -19,7 +19,7 @@ export const useProducts = () => {
 
   const fetchProductsByCategory = async (category) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/products/${category}`);
+      const res = await fetch(`${API_BASE_URL}/products/category/${category}`);
       const data = await res.json();
       setProducts(data);
       setLoading(false);
