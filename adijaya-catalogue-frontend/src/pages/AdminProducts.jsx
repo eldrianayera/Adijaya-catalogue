@@ -9,6 +9,7 @@ export default function AdminProducts() {
     loading,
     fetchProducts,
     fetchProductsByCategory,
+    category,
   ] = useProducts();
 
   const token = localStorage.getItem("token");
@@ -120,9 +121,6 @@ export default function AdminProducts() {
 
   if (loading) return <p>Loading...</p>;
 
-  const categorySet = new Set(products.map((p) => p.category));
-  const category = [...categorySet];
-
   return (
     <div className="flex flex-col gap-4 p-4">
       <h2>Admin View</h2>
@@ -130,7 +128,9 @@ export default function AdminProducts() {
         {category.map((categ, key) => (
           <button
             key={key}
-            onClick={() => fetchProductsByCategory(categ)}
+            onClick={() =>
+              categ !== "All" ? fetchProductsByCategory(categ) : fetchProducts()
+            }
             className="border-2 p-2"
           >
             {categ}
