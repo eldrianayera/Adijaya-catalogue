@@ -9,7 +9,7 @@ export default function AdminProductsCards(props) {
           {" "}
           <ProductsCards product={product} />
           <button
-            onClick={() => props.handleEdit(product.id)}
+            onClick={() => props.handleEdit(product)}
             className="border-2 p-2 m-3"
           >
             Edit

@@ -18,6 +18,7 @@ export const useAdmin = () => {
 
   const [isValidating, setIsValidating] = useState(true);
   const [isValidAdmin, setIsValidAdmin] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   // Token and Role Authentication
   useEffect(() => {
@@ -103,11 +104,17 @@ export const useAdmin = () => {
   };
 
   // Edit a product
-  const handleEdit = async (id) => {
-    console.log("Update product", id);
+  const handleEdit = (product) => {
+    setIsEditing(product);
+    return product;
+  };
+
+  // handleSaveEdit
+  const handleSaveEdit = async (product) => {
+    console.log("Update product", product);
     const editedProduct = {
       name: "Edit this Product",
-      price: 198000,
+      price: 77,
       image: imgLink,
       description: "change this product",
       category: "edit the Category",
@@ -166,7 +173,7 @@ export const useAdmin = () => {
     }
   };
 
-  return [
+  return {
     products,
     setProducts,
     loading,
@@ -176,8 +183,11 @@ export const useAdmin = () => {
     handleAdd,
     handleDelete,
     handleEdit,
+    handleSaveEdit,
     handleLogOut,
     isValidAdmin,
     isValidating,
-  ];
+    isEditing,
+    setIsEditing,
+  };
 };

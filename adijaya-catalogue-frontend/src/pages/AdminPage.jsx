@@ -3,9 +3,11 @@ import AdminLogin from "./AdminLogin";
 import CategoryBar from "../components/CategoryBar";
 import Header from "../components/Header";
 import AdminProductsCards from "../components/AdminProductsCard";
+import { useState } from "react";
+import EditProductWindow from "../components/EditProductWindow";
 
 export default function AdminPage() {
-  const [
+  const {
     products,
     setProducts,
     loading,
@@ -15,10 +17,13 @@ export default function AdminPage() {
     handleAdd,
     handleDelete,
     handleEdit,
+    handleSaveEdit,
     handleLogOut,
     isValidAdmin,
     isValidating,
-  ] = useAdmin();
+    isEditing,
+    setIsEditing,
+  } = useAdmin();
 
   if (isValidating) return <p>Checking Authentication...</p>;
   if (!isValidAdmin) return <AdminLogin />;
@@ -27,6 +32,9 @@ export default function AdminPage() {
 
   return (
     <div>
+      {isEditing && (
+        <EditProductWindow product={isEditing} setIsEditing={setIsEditing} />
+      )}
       <Header page={"admin"} handleLogOut={handleLogOut} />
       <CategoryBar
         category={category}
