@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import cn from "../lib/utils";
 
 export default function CategoryBar(props) {
   const [activeCateg, setActiveCateg] = useState("All");
 
   const handleActiveCateg = (categ) => {
-    if (categ === "All") {
+    categ === "All" ? setActiveCateg("All") : setActiveCateg(categ);
+  };
+
+  useEffect(() => {
+    if (activeCateg === "All") {
       props.fetchProducts();
     } else {
-      props.fetchCategories(categ);
-      setActiveCateg(categ);
+      props.fetchCategories(activeCateg);
     }
-  };
+  }, [activeCateg, props]);
 
   return (
     <div className="flex justify-center gap-4">
@@ -18,7 +22,10 @@ export default function CategoryBar(props) {
         <button
           key={key}
           onClick={() => handleActiveCateg(categ)}
-          className="border-2 p-2"
+          className={cn(
+            "border-2 p-2",
+            categ === activeCateg ? "bg-amber-500" : ""
+          )}
         >
           {categ}
         </button>
