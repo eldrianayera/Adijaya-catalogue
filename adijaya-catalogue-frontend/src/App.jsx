@@ -1,6 +1,6 @@
 import AdminLogin from "./pages/AdminLogin";
 import AdminProducts from "./pages/AdminPagejsx";
-import VisitorProducts from "./pages/VisitorProducts";
+import VisitorProducts from "./pages/VisitorPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export default function App() {
