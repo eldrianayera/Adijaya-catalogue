@@ -1,8 +1,13 @@
 const express = require("express");
 const pool = require("../db");
 const jwt = require("jsonwebtoken");
+const { isAdmin, isAuthenticated } = require("../middleware/auth");
 
 const router = express.Router();
+
+router.get("/validate", isAdmin, isAuthenticated, (req, res) => {
+  res.json({ valid: true, user: req.user });
+});
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
