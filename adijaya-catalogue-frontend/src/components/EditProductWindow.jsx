@@ -9,6 +9,7 @@ export default function EditProductWindow(props) {
     image: "",
     description: "",
     category: "",
+    id: "",
   });
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function EditProductWindow(props) {
         image: product.image || "",
         description: product.description || "",
         category: product.category || "",
+        id: product.id || "",
       });
     }
     document.body.style.overflow = "hidden";
@@ -72,19 +74,25 @@ export default function EditProductWindow(props) {
               }}
             />
           </div>
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-3 items-center ">
             {" "}
             <label htmlFor="name">Category : </label>
-            <input
-              type="text"
+            <select
+              onChange={handleUpdate}
+              name="category"
+              id="category"
               value={formData.category}
-              name="Category"
-              placeholder=" Category..."
-              className="p-2 border-2 grow"
-              onChange={(e) => {
-                handleUpdate(e);
-              }}
-            />
+              className="h-12 border-2 grow"
+            >
+              <option value="">-- Select category --</option>
+              {props.category.map((categ, key) => {
+                return (
+                  <option key={key} value={categ}>
+                    {categ}
+                  </option>
+                );
+              })}
+            </select>
           </div>
 
           <div className="flex gap-3 items-center">

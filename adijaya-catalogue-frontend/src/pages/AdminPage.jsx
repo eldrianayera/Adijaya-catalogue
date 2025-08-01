@@ -33,7 +33,12 @@ export default function AdminPage() {
   return (
     <div>
       {isEditing && (
-        <EditProductWindow product={isEditing} setIsEditing={setIsEditing} />
+        <EditProductWindow
+          product={isEditing}
+          setIsEditing={setIsEditing}
+          handleSaveEdit={handleSaveEdit}
+          category={category}
+        />
       )}
       <Header page={"admin"} handleLogOut={handleLogOut} />
       <CategoryBar
@@ -49,7 +54,6 @@ export default function AdminPage() {
         handleAdd={handleAdd}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
-        handleSaveEdit={handleSaveEdit}
       />
     </div>
   );

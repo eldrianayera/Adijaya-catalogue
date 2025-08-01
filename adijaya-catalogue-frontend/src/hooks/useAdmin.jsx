@@ -110,34 +110,40 @@ export const useAdmin = () => {
   };
 
   // handleSaveEdit
-  const handleSaveEdit = async (product) => {
-    console.log("Update product", product);
+  const handleSaveEdit = async (editedProduct) => {
+    console.log(editedProduct);
+    try {
+      const res = await fetch(
+        `${API_BASE_URL}/admin/products/${editedProduct.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(editedProduct),
+        }
+      );
 
-    // try {
-    //   const res = await fetch(`${API_BASE_URL}/admin/products/${id}`, {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //     body: JSON.stringify(editedProduct),
-    //   });
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to edit product: ${errorText}`);
+      }
 
-    //   if (!res.ok) {
-    //     const errorText = await res.text();
-    //     throw new Error(`Failed to edit product: ${errorText}`);
-    //   }
+      const data = await res.json();
 
-    //   const data = await res.json();
+      // Instant update
+      setProducts((prev) =>
+        prev.map((p) => (p.id === editedProduct.id ? data : p))
+      );
 
-    //   // Instant update
-    //   setProducts((prev) => prev.map((p) => (p.id === id ? data : p)));
+      // Re-fetch in background
+      fetchProducts();
 
-    //   // Re-fetch in background
-    //   fetchProducts();
-    // } catch (err) {
-    //   console.error(err);
-    // }
+      setIsEditing(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // Delete a product
