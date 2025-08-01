@@ -2,47 +2,139 @@ import { useEffect, useState } from "react";
 import cn from "../lib/utils";
 
 export default function EditProductWindow(props) {
-  const productToBeEdited = props.product;
+  const product = props.product;
   const [formData, setFormData] = useState({
-    name: product.name || "",
-    price: product.price || "",
-    image: product.image || "",
-    description: product.description || "",
-    category: product.category || "",
+    name: "",
+    price: "",
+    image: "",
+    description: "",
+    category: "",
   });
 
   useEffect(() => {
-    if (productToBeEdited) {
+    if (product) {
+      setFormData({
+        name: product.name || "",
+        price: product.price || "",
+        image: product.image || "",
+        description: product.description || "",
+        category: product.category || "",
+      });
     }
     document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [product]);
+
+  const handleUpdate = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, name: value }));
+  };
 
   return (
     <div
       className={cn(
         // position
-        "top-1/2 -translate-y-1/2  left-1/2 -translate-x-1/2",
+        "top-1/2 -translate-y-1/2  left-1/2 -translate-x-1/2 ",
         // classname
-        "z-50 fixed border-2"
+        "z-50 fixed border-2 flex flex-col w-[90%] h-[90%] justify-evenly p-3 bg-white"
       )}
     >
-      <div key={productToBeEdited.id} className="border-2 p-5">
-        <h3>{productToBeEdited.name}</h3>
-        <p>${Number(productToBeEdited.price).toFixed(2)}</p>
-        <p>{productToBeEdited.description}</p>
-        <p>
-          <em>Category: {productToBeEdited.category}</em>
-        </p>
-        <button className="m-3 border-2 p-2">Save</button>
+      <div className="grid grid-cols-[3fr_2fr] px-5">
+        <div className="flex flex-col ">
+          <div className="flex gap-3 items-center">
+            {" "}
+            <label htmlFor="name">Product name : </label>
+            <input
+              type="text"
+              value={formData.name}
+              name="name"
+              placeholder="Product name..."
+              className="p-2 border-2 grow"
+              onChange={(e) => {
+                handleUpdate(e);
+              }}
+            />
+          </div>
+          <div className="flex gap-3 items-center">
+            {" "}
+            <label htmlFor="name"> price : </label>
+            <input
+              type="text"
+              value={formData.price}
+              name="price"
+              placeholder="Product price..."
+              className="p-2 border-2 grow"
+              onChange={(e) => {
+                handleUpdate(e);
+              }}
+            />
+          </div>
+          <div className="flex gap-3 items-center">
+            {" "}
+            <label htmlFor="name">Category : </label>
+            <input
+              type="text"
+              value={formData.category}
+              name="Category"
+              placeholder=" Category..."
+              className="p-2 border-2 grow"
+              onChange={(e) => {
+                handleUpdate(e);
+              }}
+            />
+          </div>
+
+          <div className="flex gap-3 items-center">
+            {" "}
+            <label htmlFor="name">Image : </label>
+            <input
+              type="text"
+              value={formData.image}
+              name="image"
+              placeholder="Product image..."
+              className="p-2 border-2 grow"
+              onChange={(e) => {
+                handleUpdate(e);
+              }}
+            />
+          </div>
+
+          <div className="flex gap-3 items-center">
+            {" "}
+            <label htmlFor="name">Description : </label>
+            <input
+              type="text"
+              value={formData.description}
+              name="description"
+              placeholder="escription..."
+              className="p-2 border-2 grow"
+              onChange={(e) => {
+                handleUpdate(e);
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="border-2 mx-auto">
+          <img src={product.image} alt={product.name} width={400} />
+        </div>
+      </div>
+      <div className="self-end">
+        {" "}
         <button
           onClick={() => props.setIsEditing(false)}
           className="m-3 border-2 p-2"
         >
           Cancel
+        </button>
+        <button
+          onClick={props.handleSaveEdit(formData)}
+          className="m-3 border-2 p-2"
+        >
+          Save
         </button>
       </div>
     </div>

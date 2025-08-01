@@ -49,6 +49,7 @@ export default function AdminPage() {
         handleAdd={handleAdd}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
+        handleSaveEdit={handleSaveEdit}
       />
     </div>
   );
