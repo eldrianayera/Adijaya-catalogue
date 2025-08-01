@@ -5,6 +5,7 @@ import CategoryBar from "../components/CategoryBar";
 import Header from "../components/Header";
 import ProductsCards from "../components/ProductsCard";
 import { useEffect, useState } from "react";
+import AdminProductsCards from "../components/AdminProductsCard";
 
 export default function AdminProducts() {
   const [
@@ -182,7 +183,10 @@ export default function AdminProducts() {
         fetchCategories={fetchProductsByCategory}
         fetchProducts={fetchProducts}
       />
-      <ProductsCards
+      <button onClick={handleAdd} className="border-2 w-30">
+        Add Product
+      </button>
+      <AdminProductsCards
         products={products}
         handleAdd={handleAdd}
         handleDelete={handleDelete}
