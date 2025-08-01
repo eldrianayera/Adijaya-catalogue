@@ -17,9 +17,27 @@ export const useProducts = () => {
     }
   };
 
+  const fetchProductsByCategory = async (category) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/products/${category}`);
+      const data = await res.json();
+      setProducts(data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Failed to fetch products by category:", err);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  return [products, setProducts, loading, fetchProducts];
+  return [
+    products,
+    setProducts,
+    loading,
+    fetchProducts,
+    fetchProductsByCategory,
+  ];
 };

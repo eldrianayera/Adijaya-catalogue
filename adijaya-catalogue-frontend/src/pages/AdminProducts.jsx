@@ -1,10 +1,20 @@
 import { useProducts } from "../hooks/useProducts";
 import { API_BASE_URL, imgLink } from "../config";
+import AdminLogin from "./AdminLogin";
 
 export default function AdminProducts() {
-  const [products, setProducts, loading, fetchProducts] = useProducts();
-  const token = localStorage.getItem("token");
+  const [
+    products,
+    setProducts,
+    loading,
+    fetchProducts,
+    fetchProductsByCategory,
+  ] = useProducts();
 
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+
+  if (!token || role !== "admin") return <AdminLogin />;
 
   // Add new product
   const handleAdd = async () => {
@@ -110,11 +120,27 @@ export default function AdminProducts() {
 
   if (loading) return <p>Loading...</p>;
 
+  const categorySet = new Set(products.map((p) => p.category));
+  const category = [...categorySet];
+
   return (
-    <div>
+    <div className="flex flex-col gap-4 p-4">
       <h2>Admin View</h2>
-      <button onClick={handleAdd}>Add Product</button>
-      <div className="grid grid-cols-3 gap-4 p-5">
+      <div className="flex justify-center gap-4">
+        {category.map((categ, key) => (
+          <button
+            key={key}
+            onClick={() => fetchProductsByCategory(categ)}
+            className="border-2 p-2"
+          >
+            {categ}
+          </button>
+        ))}
+      </div>
+      <button onClick={handleAdd} className="border-2 w-30">
+        Add Product
+      </button>
+      <div className="grid grid-cols-3 gap-4">
         {products.map((product) => (
           <div key={product.id} className="border-2 p-5">
             <h3>{product.name}</h3>
@@ -126,8 +152,18 @@ export default function AdminProducts() {
             <p>
               <em>Category: {product.category}</em>
             </p>
-            <button onClick={() => handleEdit(product.id)}>Edit</button>
-            <button onClick={() => handleDelete(product.id)}>Delete</button>
+            <button
+              onClick={() => handleEdit(product.id)}
+              className="border-2 p-2 m-3"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDelete(product.id)}
+              className="border-2 p-2 m-3"
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>

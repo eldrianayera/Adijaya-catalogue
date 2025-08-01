@@ -29,4 +29,22 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Get products by category
+router.get("/:category", async (req, res) => {
+  try {
+    const { category } = req.params;
+    const result = await pool.query(
+      `SELECT * FROM products WHERE category=$1`,
+      [category]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

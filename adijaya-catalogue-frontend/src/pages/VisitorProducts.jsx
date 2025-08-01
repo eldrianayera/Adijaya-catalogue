@@ -4,6 +4,7 @@ export default function VisitorProducts() {
   const [products, loading] = useProducts();
   if (loading) return <p>Loading...</p>;
 
+
   return (
     <div>
       <h2>Product Catalogue</h2>
