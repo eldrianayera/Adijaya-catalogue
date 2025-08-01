@@ -8,7 +8,7 @@ export const useProducts = () => {
   const fetchProducts = async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/products`);
-      const data = res.json();
+      const data = await res.json();
       setProducts(data);
       setLoading(false);
     } catch (err) {

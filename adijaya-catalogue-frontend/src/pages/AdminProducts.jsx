@@ -5,6 +5,7 @@ export default function AdminProducts() {
   const [products, setProducts, loading, fetchProducts] = useProducts();
   const token = localStorage.getItem("token");
 
+
   // Add new product
   const handleAdd = async () => {
     console.log("Add a new product");
