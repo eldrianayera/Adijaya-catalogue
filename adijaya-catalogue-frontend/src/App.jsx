@@ -1,6 +1,5 @@
-import AdminLogin from "./pages/AdminLogin";
-import AdminProducts from "./pages/AdminPagejsx";
-import VisitorProducts from "./pages/VisitorPage";
+import AdminPage from "./pages/AdminPage";
+import VisitorPage from "./pages/VisitorPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export default function App() {
@@ -8,8 +7,8 @@ export default function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<VisitorProducts />} />
-          <Route path="/admin/products" element={<AdminProducts />} />
+          <Route index element={<VisitorPage />} />
+          <Route path="/admin/products" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </>

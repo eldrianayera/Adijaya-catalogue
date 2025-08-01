@@ -3,11 +3,10 @@ import { API_BASE_URL, imgLink } from "../config";
 import AdminLogin from "./AdminLogin";
 import CategoryBar from "../components/CategoryBar";
 import Header from "../components/Header";
-import ProductsCards from "../components/ProductsCard";
 import { useEffect, useState } from "react";
 import AdminProductsCards from "../components/AdminProductsCard";
 
-export default function AdminProducts() {
+export default function AdminPage() {
   const [
     products,
     setProducts,
