@@ -1,3 +1,4 @@
+import CategoryBar from "../../components/CategoryBar";
 import Header from "../../components/Header";
 import { useProducts } from "../hooks/useProducts";
 
@@ -15,6 +16,11 @@ export default function VisitorProducts() {
   return (
     <div>
       <Header />
+      <CategoryBar
+        category={category}
+        fetchCategories={fetchProductsByCategory}
+        fetchProducts={fetchProducts}
+      />
       <ul>
         {products.map((product) => (
           <li key={product.id}>
