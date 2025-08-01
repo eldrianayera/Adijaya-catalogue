@@ -1,3 +1,4 @@
+import Header from "../../components/Header";
 import { useProducts } from "../hooks/useProducts";
 
 export default function VisitorProducts() {
@@ -13,7 +14,7 @@ export default function VisitorProducts() {
 
   return (
     <div>
-      <h2>Product Catalogue</h2>
+      <Header />
       <ul>
         {products.map((product) => (
           <li key={product.id}>
