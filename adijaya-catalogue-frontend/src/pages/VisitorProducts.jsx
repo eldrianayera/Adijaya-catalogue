@@ -1,9 +1,15 @@
 import { useProducts } from "../hooks/useProducts";
 
 export default function VisitorProducts() {
-  const [products, loading] = useProducts();
+  const [
+    products,
+    ,
+    loading,
+    fetchProducts,
+    fetchProductsByCategory,
+    category,
+  ] = useProducts();
   if (loading) return <p>Loading...</p>;
-
 
   return (
     <div>
