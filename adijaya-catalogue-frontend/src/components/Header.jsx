@@ -4,12 +4,22 @@ export default function Header(props) {
       <h1 className="font-bold text-5xl">
         {props.page === "admin" ? "Adijaya Admin" : "Adijaya Catalogue"}
       </h1>
-      <a
-        href={props.page === "admin" ? "/" : "/admin/products"}
-        className="absolute right-5 border-2 p-2"
-      >
-        {props.page === "admin" ? "Catalogue" : "admin"}
-      </a>
+      {props.page === "admin" ? (
+        <div className="absolute right-5 flex gap-4">
+          <a className="border-2 p-1" href="/">
+            Catalogue
+          </a>
+          <button onClick={props.handleLogOut} className="border-2 p-1">
+            Log out
+          </button>
+        </div>
+      ) : (
+        <div className="absolute right-5">
+          <a className="border-2 p-1" href="/admin/products">
+            Admin
+          </a>
+        </div>
+      )}
     </header>
   );
 }

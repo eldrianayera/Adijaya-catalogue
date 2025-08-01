@@ -62,6 +62,14 @@ export default function AdminProducts() {
   if (isValidating) return <p>Checking Authentication...</p>;
   if (!isValidAdmin) return <AdminLogin />;
 
+  // Log out
+  const handleLogOut = () => {
+    console.log("Log out");
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    setIsValidAdmin(false);
+  };
+
   // Add new product
   const handleAdd = async () => {
     console.log("Add a new product");
@@ -168,7 +176,7 @@ export default function AdminProducts() {
 
   return (
     <div>
-      <Header page={"admin"} />
+      <Header page={"admin"} handleLogOut={handleLogOut} />
       <CategoryBar
         category={category}
         fetchCategories={fetchProductsByCategory}
