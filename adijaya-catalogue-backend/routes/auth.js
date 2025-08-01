@@ -19,7 +19,7 @@ router.post("/login", async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Wrong username or password" });
     }
 
     const user = result.rows[0];
