@@ -1,10 +1,10 @@
 import { useProducts } from "../hooks/useProducts";
 import { API_BASE_URL, imgLink } from "../config";
 import AdminLogin from "./AdminLogin";
-import CategoryBar from "../../components/CategoryBar";
-import Header from "../../components/Header";
-import ProductsCards from "../../components/ProductsCard";
-import { useEffect } from "react";
+import CategoryBar from "../components/CategoryBar";
+import Header from "../components/Header";
+import ProductsCards from "../components/ProductsCard";
+import { useEffect, useState } from "react";
 
 export default function AdminProducts() {
   const [
@@ -19,7 +19,48 @@ export default function AdminProducts() {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
-  if (!token || role !== "admin") return <AdminLogin />;
+  const [isValidating, setIsValidating] = useState(true);
+  const [isValidAdmin, setIsValidAdmin] = useState(false);
+
+  // Token and Role Authentication
+  useEffect(() => {
+    const validateToken = async () => {
+      if (!token || role !== "admin") {
+        setIsValidAdmin(false);
+        setIsValidating(false);
+        return;
+      }
+      try {
+        const res = await fetch(`${API_BASE_URL}/auth/validate`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          console.error("Failed to Validate :", errorText);
+
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+
+          setIsValidating(false);
+          setIsValidAdmin(false);
+
+          return;
+        }
+
+        setIsValidAdmin(true);
+        setIsValidating(false);
+      } catch (error) {
+        console.error("Authentication failed:", error);
+        setIsValidating(false);
+      }
+    };
+
+    validateToken();
+  }, [token, role]);
+
+  if (isValidating) return <p>Checking Authentication...</p>;
+  if (!isValidAdmin) return <AdminLogin />;
 
   // Add new product
   const handleAdd = async () => {

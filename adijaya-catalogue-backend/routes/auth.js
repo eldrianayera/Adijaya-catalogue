@@ -5,7 +5,7 @@ const { isAdmin, isAuthenticated } = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get("/validate", isAdmin, isAuthenticated, (req, res) => {
+router.get("/validate", isAuthenticated, isAdmin, (req, res) => {
   res.json({ valid: true, user: req.user });
 });
 

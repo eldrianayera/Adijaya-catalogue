@@ -1,5 +1,5 @@
-import CategoryBar from "../../components/CategoryBar";
-import Header from "../../components/Header";
+import CategoryBar from "../components/CategoryBar";
+import Header from "../components/Header";
 import { useProducts } from "../hooks/useProducts";
 
 export default function VisitorProducts() {
