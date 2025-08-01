@@ -131,7 +131,7 @@ export default function EditProductWindow(props) {
           Cancel
         </button>
         <button
-          onClick={props.handleSaveEdit(formData)}
+          onClick={() => props.handleSaveEdit(formData)}
           className="m-3 border-2 p-2"
         >
           Save
