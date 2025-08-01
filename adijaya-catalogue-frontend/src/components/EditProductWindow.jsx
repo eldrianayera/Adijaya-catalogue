@@ -30,7 +30,7 @@ export default function EditProductWindow(props) {
 
   const handleUpdate = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, name: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
