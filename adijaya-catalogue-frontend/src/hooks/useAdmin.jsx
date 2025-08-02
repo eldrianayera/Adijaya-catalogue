@@ -1,6 +1,5 @@
 import { useProducts } from "./useProducts";
 import { useEffect, useState } from "react";
-import AdminLogin from "../pages/AdminLogin";
 import { API_BASE_URL, imgLink } from "../config";
 
 export const useAdmin = () => {
@@ -11,6 +10,7 @@ export const useAdmin = () => {
     fetchProducts,
     fetchProductsByCategory,
     category,
+    setCategory,
   ] = useProducts();
 
   const token = localStorage.getItem("token");
@@ -184,6 +184,7 @@ export const useAdmin = () => {
     fetchProducts,
     fetchProductsByCategory,
     category,
+    setCategory,
     handleAdd,
     handleDelete,
     handleEdit,

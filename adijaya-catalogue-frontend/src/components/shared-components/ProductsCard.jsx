@@ -1,6 +1,9 @@
 export default function ProductsCards({ product }) {
   return (
-    <div className="rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col w-60 h-80">
+    <a
+      className="rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col w-60 h-80"
+      href={`/product-detail/${product.id}`}
+    >
       {/* Image container */}
       <div className="w-full aspect-square overflow-hidden flex items-center justify-center bg-gray-100">
         {product.image ? (
@@ -21,6 +24,6 @@ export default function ProductsCards({ product }) {
           ${Number(product.price).toFixed(2)}
         </p>
       </div>
-    </div>
+    </a>
   );
 }

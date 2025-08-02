@@ -14,6 +14,7 @@ export default function AdminPage() {
     fetchProducts,
     fetchProductsByCategory,
     category,
+    setCategory,
     handleAdd,
     handleDelete,
     handleEdit,

@@ -6,6 +6,10 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(["All"]);
 
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const fetchProducts = async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/products`);
@@ -36,10 +40,6 @@ export const useProducts = () => {
     }
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return [
     products,
     setProducts,
@@ -47,5 +47,6 @@ export const useProducts = () => {
     fetchProducts,
     fetchProductsByCategory,
     category,
+    setCategory,
   ];
 };

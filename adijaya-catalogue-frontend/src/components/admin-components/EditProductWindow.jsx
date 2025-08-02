@@ -81,6 +81,7 @@ export default function EditProductWindow(props) {
               }}
             />
           </div>
+
           <div className="flex gap-3 items-center ">
             {" "}
             <label htmlFor="name">Category : </label>
@@ -91,17 +92,31 @@ export default function EditProductWindow(props) {
               value={formData.category}
               className="h-12 border-2 grow"
             >
-              <option value="" disabled hidden>
+              <option value="" disabled>
                 -- Select category --
               </option>
-              {props.category.map((categ, key) => {
-                return (
-                  <option key={key} value={categ}>
-                    {categ}
-                  </option>
-                );
-              })}
+              {props.category
+                .filter((categ) => categ !== "All")
+                .map((categ, key) => {
+                  return (
+                    <option key={key} value={categ}>
+                      {categ}
+                    </option>
+                  );
+                })}
+              {formData.category &&
+                !props.category.includes(formData.category) && (
+                  <option value={formData.category}>{formData.category}</option>
+                )}
             </select>
+            <input
+              type="text"
+              placeholder="Add new category..."
+              className="focus:outline-hidden"
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, category: e.target.value }))
+              }
+            />
           </div>
 
           <div className="flex gap-3 items-center">
