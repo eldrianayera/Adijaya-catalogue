@@ -1,6 +1,6 @@
 import AdminPage from "./pages/AdminPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import VisitorPage from "./pages/VisitorPage";
+import VisitorPage from "./pages/PublicPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export default function App() {
