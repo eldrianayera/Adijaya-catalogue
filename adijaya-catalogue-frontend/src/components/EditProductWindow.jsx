@@ -136,7 +136,13 @@ export default function EditProductWindow(props) {
         </div>
 
         <div className="border-2 mx-auto">
-          <img src={product.image} alt={product.name} width={400} />
+          {formData.image ? (
+            <img src={formData.image} alt={formData.name} width={400} />
+          ) : (
+            <div className="w-[400px] h-[300px] flex items-center justify-center bg-gray-100 text-gray-500">
+              No image
+            </div>
+          )}
         </div>
       </div>
       <div className="self-end">

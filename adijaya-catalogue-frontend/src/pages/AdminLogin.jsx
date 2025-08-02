@@ -20,7 +20,12 @@ export default function AdminLogin() {
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await res.json();
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        data = null; // fallback if not JSON
+      }
 
       if (!res.ok) {
         console.error(data.message);

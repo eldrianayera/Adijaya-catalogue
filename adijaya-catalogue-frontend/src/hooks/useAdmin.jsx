@@ -124,12 +124,17 @@ export const useAdmin = () => {
         }
       );
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Failed to edit product: ${errorText}`);
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        data = null; // fallback if not JSON
       }
 
-      const data = await res.json();
+      if (!res.ok) {
+        const errorText = data?.message;
+        throw new Error(`Failed to edit product: ${errorText}`);
+      }
 
       // Instant update
       setProducts((prev) =>
@@ -156,6 +161,7 @@ export const useAdmin = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (!res.ok) {
         const errorText = await res.text();
         throw new Error(`Failed to edit product: ${errorText}`);

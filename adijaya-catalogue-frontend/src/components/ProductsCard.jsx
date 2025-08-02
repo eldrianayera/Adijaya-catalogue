@@ -1,23 +1,25 @@
-export default function ProductsCards(props) {
+export default function ProductsCards({ product }) {
   return (
-    <div>
-      {" "}
-      <div className="grid grid-cols-3 gap-4">
-        <div key={props.product.id} className="border-2 p-5">
-          <h3>{props.product.name}</h3>
-          <p>${Number(props.product.price).toFixed(2)}</p>
-          {props.product.image && (
-            <img
-              src={props.product.image}
-              alt={props.product.name}
-              width={100}
-            />
-          )}
-          <p>{props.product.description}</p>
-          <p>
-            <em>Category: {props.product.category}</em>
-          </p>
-        </div>
+    <div className="border rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col">
+      {/* Image container */}
+      <div className="h-48 w-full border-b overflow-hidden flex items-center justify-center bg-gray-100">
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="text-gray-400 text-sm">No image</div>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="p-4 flex flex-col flex-grow">
+        <h3 className="text-lg font-semibold truncate">{product.name}</h3>
+        <p className="text-gray-700 font-medium">
+          ${Number(product.price).toFixed(2)}
+        </p>
       </div>
     </div>
   );

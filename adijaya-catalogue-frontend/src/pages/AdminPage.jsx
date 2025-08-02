@@ -2,7 +2,7 @@ import { useAdmin } from "../hooks/useAdmin";
 import AdminLogin from "./AdminLogin";
 import CategoryBar from "../components/CategoryBar";
 import Header from "../components/Header";
-import AdminProductsCards from "../components/AdminProductsCard";
+import AdminCard from "../components/AdminCard";
 import { useState } from "react";
 import EditProductWindow from "../components/EditProductWindow";
 
@@ -50,12 +50,14 @@ export default function AdminPage() {
       <button onClick={() => setIsEditing({})} className="border-2 w-30">
         Add Product
       </button>
-      <AdminProductsCards
-        products={products}
-        handleAdd={handleAdd}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-      />
+      <main>
+        <AdminCard
+          products={products}
+          handleAdd={handleAdd}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+      </main>
     </div>
   );
 }

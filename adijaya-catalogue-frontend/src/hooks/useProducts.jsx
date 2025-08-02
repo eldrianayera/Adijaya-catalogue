@@ -9,9 +9,13 @@ export const useProducts = () => {
   const fetchProducts = async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/products`);
+
       const data = await res.json();
+
       setProducts(data);
+
       const categorySet = new Set(data.map((p) => p.category));
+
       setCategory(["All", ...categorySet]);
       setLoading(false);
     } catch (err) {
