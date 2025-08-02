@@ -38,6 +38,7 @@ export default function AdminPage() {
           setIsEditing={setIsEditing}
           handleSaveEdit={handleSaveEdit}
           category={category}
+          handleAdd={handleAdd}
         />
       )}
       <Header page={"admin"} handleLogOut={handleLogOut} />
@@ -46,7 +47,7 @@ export default function AdminPage() {
         fetchCategories={fetchProductsByCategory}
         fetchProducts={fetchProducts}
       />
-      <button onClick={handleAdd} className="border-2 w-30">
+      <button onClick={() => setIsEditing({})} className="border-2 w-30">
         Add Product
       </button>
       <AdminProductsCards

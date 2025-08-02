@@ -3,6 +3,7 @@ import cn from "../lib/utils";
 
 export default function EditProductWindow(props) {
   const product = props.product;
+  const [editOrAdd, setEditOrAdd] = useState("edit");
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -13,6 +14,10 @@ export default function EditProductWindow(props) {
   });
 
   useEffect(() => {
+    if (!product || Object.keys(product).length === 0) {
+      setEditOrAdd("add");
+      console.log("Add new product");
+    }
     if (product) {
       setFormData({
         name: product.name || "",
@@ -55,6 +60,7 @@ export default function EditProductWindow(props) {
               name="name"
               placeholder="Product name..."
               className="p-2 border-2 grow"
+              required
               onChange={(e) => {
                 handleUpdate(e);
               }}
@@ -69,6 +75,7 @@ export default function EditProductWindow(props) {
               name="price"
               placeholder="Product price..."
               className="p-2 border-2 grow"
+              required
               onChange={(e) => {
                 handleUpdate(e);
               }}
@@ -140,12 +147,21 @@ export default function EditProductWindow(props) {
         >
           Cancel
         </button>
-        <button
-          onClick={() => props.handleSaveEdit(formData)}
-          className="m-3 border-2 p-2"
-        >
-          Save
-        </button>
+        {editOrAdd === "edit" ? (
+          <button
+            onClick={() => props.handleSaveEdit(formData)}
+            className="m-3 border-2 p-2"
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            onClick={() => props.handleAdd(formData)}
+            className="m-3 border-2 p-2"
+          >
+            Add
+          </button>
+        )}
       </div>
     </div>
   );

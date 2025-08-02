@@ -66,15 +66,8 @@ export const useAdmin = () => {
   };
 
   // Add new product
-  const handleAdd = async () => {
-    console.log("Add a new product");
-    const newProduct = {
-      name: "New Product",
-      price: 12000,
-      image: imgLink,
-      description: "Sample description",
-      category: "Sample Category",
-    };
+  const handleAdd = async (newProduct) => {
+    console.log("Add a new product", newProduct);
 
     try {
       const res = await fetch(`${API_BASE_URL}/admin/products`, {
@@ -86,18 +79,24 @@ export const useAdmin = () => {
         body: JSON.stringify(newProduct),
       });
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Failed to edit product: ${errorText}`);
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        data = null; // fallback if not JSON
       }
 
-      const data = await res.json();
+      if (!res.ok) {
+        const errorText = data?.message;
+        throw new Error(`Failed to add product: ${errorText}`);
+      }
 
       // Instant update
       setProducts((prev) => [...prev, data]);
 
       // Re-fetch in background
       fetchProducts();
+      setIsEditing(false);
     } catch (err) {
       console.error(err);
     }
