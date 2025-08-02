@@ -1,10 +1,9 @@
 import CategoryBar from "../components/shared-components/CategoryBar";
 import Header from "../components/shared-components/Header";
-import { useProducts } from "../hooks/useProducts";
 import AdminCard from "../components/shared-components/CardContainer";
 import { useAdmin } from "../hooks/useAdmin";
 
-export default function VisitorPage() {
+export default function PublicPage() {
   const {
     products,
     loading,
