@@ -17,7 +17,7 @@ export default function CategoryBar(props) {
   }, [activeCateg, props]);
 
   return (
-    <div className="flex justify-center gap-4">
+    <div className="flex justify-center gap-4 flex-wrap">
       {props.category.map((categ, key) => (
         <button
           key={key}

@@ -2,7 +2,7 @@ import ProductsCards from "./ProductsCard";
 
 export default function CardContainer(props) {
   return (
-    <div className="grid grid-cols-6">
+    <div className="flex flex-wrap">
       {" "}
       {props.products.map((product) => (
         <div key={product.id} className="mx-auto rounded-lg">
