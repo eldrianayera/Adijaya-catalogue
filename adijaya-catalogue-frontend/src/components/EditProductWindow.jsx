@@ -84,7 +84,9 @@ export default function EditProductWindow(props) {
               value={formData.category}
               className="h-12 border-2 grow"
             >
-              <option value="">-- Select category --</option>
+              <option value="" disabled hidden>
+                -- Select category --
+              </option>
               {props.category.map((categ, key) => {
                 return (
                   <option key={key} value={categ}>
