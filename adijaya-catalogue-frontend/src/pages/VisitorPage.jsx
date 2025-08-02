@@ -1,17 +1,18 @@
 import CategoryBar from "../components/shared-components/CategoryBar";
 import Header from "../components/shared-components/Header";
 import { useProducts } from "../hooks/useProducts";
-import VisitorCard from "../components/visitor-components/VisitorCard";
+import AdminCard from "../components/shared-components/CardContainer";
+import { useAdmin } from "../hooks/useAdmin";
 
 export default function VisitorPage() {
-  const [
+  const {
     products,
-    ,
     loading,
     fetchProducts,
     fetchProductsByCategory,
     category,
-  ] = useProducts();
+    isValidAdmin,
+  } = useAdmin();
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -23,7 +24,7 @@ export default function VisitorPage() {
         fetchProducts={fetchProducts}
       />
       <main>
-        <VisitorCard products={products} />
+        <AdminCard products={products} isValidAdmin={isValidAdmin} />
       </main>
     </div>
   );

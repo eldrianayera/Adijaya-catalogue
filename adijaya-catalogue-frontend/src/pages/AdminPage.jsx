@@ -2,7 +2,7 @@ import { useAdmin } from "../hooks/useAdmin";
 import AdminLogin from "./AdminLogin";
 import CategoryBar from "../components/shared-components/CategoryBar";
 import Header from "../components/shared-components/Header";
-import AdminCard from "../components/admin-components/AdminCard";
+import AdminCard from "../components/shared-components/CardContainer";
 import { useState } from "react";
 import EditProductWindow from "../components/admin-components/EditProductWindow";
 
@@ -57,6 +57,7 @@ export default function AdminPage() {
           handleAdd={handleAdd}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
+          isValidAdmin={isValidAdmin}
         />
       </main>
     </div>

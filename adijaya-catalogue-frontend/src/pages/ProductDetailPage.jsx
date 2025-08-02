@@ -9,8 +9,8 @@ export default function ProductDetailPage() {
   const { isValidAdmin } = useAdmin();
 
   useEffect(() => {
-    console.log(isValidAdmin);
-  }, []);
+    console.log("Admin validation status:", isValidAdmin);
+  }, [isValidAdmin]);
 
   return <div>Product Detail</div>;
 }
