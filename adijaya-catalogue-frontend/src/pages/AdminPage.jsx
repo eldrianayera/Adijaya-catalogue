@@ -42,7 +42,6 @@ export default function AdminPage() {
           handleAdd={handleAdd}
         />
       )}
-      <Header page={"admin"} handleLogOut={handleLogOut} />
       <CategoryBar
         category={category}
         fetchCategories={fetchProductsByCategory}

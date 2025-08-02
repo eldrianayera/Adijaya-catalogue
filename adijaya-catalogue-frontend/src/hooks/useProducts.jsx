@@ -5,6 +5,7 @@ export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(["All"]);
+  const [productById, setProductById] = useState(null);
 
   useEffect(() => {
     fetchProducts();
@@ -24,6 +25,18 @@ export const useProducts = () => {
       setLoading(false);
     } catch (err) {
       console.error("Failed to fetch products:", err);
+      setLoading(false);
+    }
+  };
+
+  const fetchProductsById = async (id) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/products/id/${id}`);
+      const data = await res.json();
+      setProductById(data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Failed to fetch products by id:", err);
       setLoading(false);
     }
   };
@@ -48,5 +61,8 @@ export const useProducts = () => {
     fetchProductsByCategory,
     category,
     setCategory,
+    fetchProductsById,
+    productById,
+    setProductById,
   ];
 };

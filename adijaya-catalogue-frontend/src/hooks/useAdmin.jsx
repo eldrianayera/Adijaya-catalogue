@@ -11,6 +11,9 @@ export const useAdmin = () => {
     fetchProductsByCategory,
     category,
     setCategory,
+    fetchProductsById,
+    productById,
+    setProductById,
   ] = useProducts();
 
   const token = localStorage.getItem("token");
@@ -194,5 +197,8 @@ export const useAdmin = () => {
     isValidating,
     isEditing,
     setIsEditing,
+    fetchProductsById,
+    productById,
+    setProductById,
   };
 };

@@ -16,7 +16,6 @@ export default function PublicPage() {
 
   return (
     <div>
-      <Header />
       <CategoryBar
         category={category}
         fetchCategories={fetchProductsByCategory}
