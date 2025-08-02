@@ -1,16 +1,16 @@
-import ProductsCards from "./ProductsCard";
+import ProductsCards from "../shared-components/ProductsCard";
 
 export default function AdminCard(props) {
   return (
-    <div className="grid grid-cols-5 gap-6">
+    <div className="grid grid-cols-6">
       {" "}
       {props.products.map((product) => (
-        <div key={product.id} className="border-2">
+        <div key={product.id} className="mx-auto rounded-lg">
           {" "}
           {/* Product card content */}
           <ProductsCards product={product} />
           {/* Admin action buttons */}
-          <div className="mt-auto flex gap-2 justify-center border-t">
+          <div className="mt-auto flex gap-2 justify-center">
             {" "}
             <button
               onClick={() => props.handleEdit(product)}

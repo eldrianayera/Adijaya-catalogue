@@ -1,13 +1,13 @@
 export default function ProductsCards({ product }) {
   return (
-    <div className="border rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col">
+    <div className="rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col w-60 h-80">
       {/* Image container */}
-      <div className="h-48 w-full border-b overflow-hidden flex items-center justify-center bg-gray-100">
+      <div className="w-full aspect-square overflow-hidden flex items-center justify-center bg-gray-100">
         {product.image ? (
           <img
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-cover"
+            className="object-cover"
           />
         ) : (
           <div className="text-gray-400 text-sm">No image</div>

@@ -1,6 +1,7 @@
-import CategoryBar from "../components/CategoryBar";
-import Header from "../components/Header";
+import CategoryBar from "../components/shared-components/CategoryBar";
+import Header from "../components/shared-components/Header";
 import { useProducts } from "../hooks/useProducts";
+import VisitorCard from "../components/visitor-components/VisitorCard";
 
 export default function VisitorPage() {
   const [
@@ -21,21 +22,9 @@ export default function VisitorPage() {
         fetchCategories={fetchProductsByCategory}
         fetchProducts={fetchProducts}
       />
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <h3>{product.name}</h3>
-            <p>${Number(product.price).toFixed(2)}</p>
-            {product.image && (
-              <img src={product.image} alt={product.name} width={100} />
-            )}
-            <p>{product.description}</p>
-            <p>
-              <em>Category: {product.category}</em>
-            </p>
-          </li>
-        ))}
-      </ul>
+      <main>
+        <VisitorCard products={products} />
+      </main>
     </div>
   );
 }
