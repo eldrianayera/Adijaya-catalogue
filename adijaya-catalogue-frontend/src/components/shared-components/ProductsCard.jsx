@@ -20,9 +20,7 @@ export default function ProductsCards({ product }) {
       {/* Content */}
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="text-lg font-semibold truncate">{product.name}</h3>
-        <p className="text-gray-700 font-medium">
-          ${Number(product.price).toFixed(2)}
-        </p>
+        <p className="text-gray-700 font-medium">Rp{Number(product.price)}</p>
       </div>
     </a>
   );

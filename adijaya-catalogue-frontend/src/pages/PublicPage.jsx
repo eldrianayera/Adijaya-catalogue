@@ -1,7 +1,8 @@
 import CategoryBar from "../components/shared-components/CategoryBar";
 import Header from "../components/shared-components/Header";
-import AdminCard from "../components/shared-components/CardContainer";
+import CardContainer from "../components/shared-components/CardContainer";
 import { useAdmin } from "../hooks/useAdmin";
+import ProductsCards from "../components/shared-components/ProductsCard";
 
 export default function PublicPage() {
   const {
@@ -22,7 +23,7 @@ export default function PublicPage() {
         fetchProducts={fetchProducts}
       />
       <main>
-        <AdminCard products={products} isValidAdmin={isValidAdmin} />
+        <CardContainer products={products} isValidAdmin={isValidAdmin} />
       </main>
     </div>
   );

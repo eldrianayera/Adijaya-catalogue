@@ -1,6 +1,6 @@
 import ProductsCards from "./ProductsCard";
 
-export default function AdminCard(props) {
+export default function CardContainer(props) {
   return (
     <div className="grid grid-cols-6">
       {" "}

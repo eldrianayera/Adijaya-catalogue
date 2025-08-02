@@ -66,6 +66,7 @@ export const useAdmin = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     setIsValidAdmin(false);
+    window.location.href = "/admin/login";
   };
 
   // Add new product
