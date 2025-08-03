@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { axiosInstance } from "../api/axiosInstance";
+import Header from "../components/shared-components/Header";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -29,36 +30,39 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <form
-        className="flex flex-col p-5 gap-2 w-120 border-2"
-        onSubmit={handleSubmit}
-      >
-        <p className="text-red-600">{errMsg}</p>
-        <label htmlFor="username">Username :</label>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          name="username"
-          id="username"
-          placeholder="username"
-          className="border-2 p-2"
-          value={username}
-        />
-        <label htmlFor="password">Username :</label>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          name="password"
-          id="password"
-          placeholder="password"
-          className="border-2 p-2"
-          value={password}
-        />
-        <button type="submit" className="border-2 w-20 mx-auto p-1">
-          Login
-        </button>
-      </form>
+    <div>
+      <Header />
+      <div className="flex items-center justify-center h-screen">
+        <form
+          className="flex flex-col p-5 gap-2 w-120 border-2"
+          onSubmit={handleSubmit}
+        >
+          <p className="text-red-600">{errMsg}</p>
+          <label htmlFor="username">Username :</label>
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username"
+            className="border-2 p-2"
+            value={username}
+          />
+          <label htmlFor="password">Username :</label>
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            className="border-2 p-2"
+            value={password}
+          />
+          <button type="submit" className="border-2 w-20 mx-auto p-1">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

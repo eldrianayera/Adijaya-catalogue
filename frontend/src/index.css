@@ -33,7 +33,7 @@
 
     --card: 222 47% 8%;
 
-    --primary: 250 65% 65%;
+    --primary: 76, 100%, 30%;
     --secondary: 213 31% 91%;
 
     --border: 217 33% 20%;
@@ -76,8 +76,8 @@
 
 @utility text-glow {
   @apply relative z-30;
-  text-shadow: 0 0 5px rgba(255, 45, 241, 0.6), 0 0 10px rgba(255, 45, 241, 0.7),
-    0 0 20px rgba(255, 45, 241, 0.8), 0 0 40px rgba(255, 45, 241, 0.9);
+  text-shadow: 0 0 5px rgba(152, 205, 0, 0.6), 0 0 10px rgba(152, 205, 0, 0.7),
+    0 0 20px rgba(152, 205, 0, 0.8), 0 0 40px rgba(152, 205, 0, 0.9);
 }
 
 @utility section-header {
@@ -100,6 +100,10 @@
 
 @utility container-glow-sm {
   @apply shadow-[0_0_10px_hsl(var(--primary))];
+}
+
+@utility image-container {
+  @apply aspect-square overflow-hidden flex items-center justify-center bg-foreground;
 }
 
 #root {

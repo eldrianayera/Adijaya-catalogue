@@ -5,7 +5,7 @@ export default function CardContainer(props) {
     <div className="flex flex-wrap gap-3 justify-center">
       {" "}
       {props.products.map((product) => (
-        <div key={product.id} className="rounded-lg">
+        <div key={product.id} className="rounded-lg border-4 card-hover ">
           {" "}
           {/* Product card content */}
           <ProductsCards product={product} />

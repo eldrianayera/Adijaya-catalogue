@@ -5,7 +5,7 @@ export default function ProductsCards({ product }) {
       href={`/product-detail/${product.id}`}
     >
       {/* Image container */}
-      <div className="w-full aspect-square overflow-hidden flex items-center justify-center bg-gray-100">
+      <div className="image-container">
         {product.image ? (
           <img
             src={product.image}

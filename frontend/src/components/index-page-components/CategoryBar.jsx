@@ -17,14 +17,18 @@ export default function CategoryBar(props) {
   }, [activeCateg, props]);
 
   return (
-    <div className="flex justify-center gap-4 flex-wrap">
+    <div
+      className="flex justify-center gap-4 flex-wrap scroll-mt-30"
+      id="product"
+    >
+      {" "}
       {props.category.map((categ, key) => (
         <button
           key={key}
           onClick={() => handleActiveCateg(categ)}
           className={cn(
-            "border-2 p-2",
-            categ === activeCateg ? "bg-amber-500" : ""
+            "p-2 primary-button bg-background border-4",
+            categ === activeCateg ? "bg-primary/70 " : ""
           )}
         >
           {categ}

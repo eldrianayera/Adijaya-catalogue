@@ -22,6 +22,7 @@ export default function SingleProductDetail() {
   });
 
   const [isEditingSingleProduct, setIsEditingSingleProduct] = useState(false);
+  const canEdit = isValidAdmin && isEditingSingleProduct;
 
   useEffect(() => {
     fetchProductsById(id);
@@ -30,12 +31,12 @@ export default function SingleProductDetail() {
   useEffect(() => {
     if (productById) {
       setFormData({
-        name: productById.name || "",
-        price: productById.price || "",
-        image: productById.image || "",
-        description: productById.description || "",
-        category: productById.category || "",
-        id: productById.id || "",
+        name: productById.name ?? "",
+        price: productById.price ?? "",
+        image: productById.image ?? "",
+        description: productById.description ?? "",
+        category: productById.category ?? "",
+        id: productById.id ?? "",
       });
     }
   }, [productById]);
@@ -55,14 +56,14 @@ export default function SingleProductDetail() {
   }
 
   return (
-    <div className="max-w-6xl flex flex-col mx-auto border-8 mt-30">
+    <div className="max-w-6xl flex flex-col mx-auto border-8">
       <div className="">
         <a href="/" className="border-2">
           Home
         </a>
       </div>
       <div className="flex">
-        <div className="w-100 aspect-square overflow-hidden flex items-center justify-center bg-gray-100">
+        <div className="image-container w-100">
           {formData.image ? (
             <img
               src={formData.image}
@@ -78,8 +79,8 @@ export default function SingleProductDetail() {
             className="text-4xl font-bold focus:outline-hidden"
             value={formData.name}
             name="name"
-            onChange={isValidAdmin ? handleChange : undefined}
-            readOnly={!isValidAdmin || !isEditingSingleProduct}
+            onChange={canEdit ? handleChange : undefined}
+            readOnly={!canEdit}
           />
           <div>
             <label className="text-4xl font-bold " htmlFor="price">
@@ -89,23 +90,23 @@ export default function SingleProductDetail() {
               className="text-4xl font-bold focus:outline-hidden"
               value={formData.price}
               name="price"
-              readOnly={!isValidAdmin || !isEditingSingleProduct}
-              onChange={isValidAdmin ? handleChange : undefined}
+              readOnly={!canEdit}
+              onChange={canEdit ? handleChange : undefined}
             />
           </div>
           <input
             className="text-sm text-gray-600 focus:outline-hidden"
             value={formData.category}
             name="category"
-            readOnly={!isValidAdmin || !isEditingSingleProduct}
-            onChange={isValidAdmin ? handleChange : undefined}
+            readOnly={!canEdit}
+            onChange={canEdit ? handleChange : undefined}
           />
           <textarea
             value={formData.description}
             name="description"
             className="resize-none focus:outline-hidden w-160"
-            readOnly={!isValidAdmin || !isEditingSingleProduct}
-            onChange={isValidAdmin ? handleChange : undefined}
+            readOnly={!canEdit}
+            onChange={canEdit ? handleChange : undefined}
             style={{
               fieldSizing: "content",
               minHeight: "2.5rem",

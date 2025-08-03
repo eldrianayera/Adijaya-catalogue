@@ -1,10 +1,13 @@
-import CategoryBar from "../components/shared-components/CategoryBar";
+import CategoryBar from "../components/index-page-components/CategoryBar";
 import CardContainer from "../components/shared-components/CardContainer";
 import { useAdmin } from "../hooks/useAdmin";
 import EditProductWindow from "../components/admin-components/EditProductWindow";
-import HeroContainer from "../components/shared-components/HeroContainer";
+import HeroContainer1 from "../components/index-page-components/HeroContainer1";
+import HeroContainer2 from "../components/index-page-components/HeroContainer2";
 import Footer from "../components/shared-components/Footer";
 import Header from "../components/shared-components/Header";
+import About from "../components/index-page-components/About";
+import Contact from "../components/index-page-components/Contact";
 
 export default function PublicPage() {
   const {
@@ -40,8 +43,9 @@ export default function PublicPage() {
       <Header admin={isValidAdmin} handleLogOut={handleLogOut} />
 
       <main className="px-9 flex flex-col gap-12 pt-30">
-        <HeroContainer />
-        <HeroContainer />
+        <HeroContainer1 />
+        <HeroContainer2 />
+        <About />
         <CategoryBar
           category={category}
           fetchCategories={fetchProductsByCategory}
@@ -62,6 +66,7 @@ export default function PublicPage() {
           handleEdit={handleEdit}
           isValidAdmin={isValidAdmin}
         />
+        <Contact />
       </main>
       <Footer />
     </div>
