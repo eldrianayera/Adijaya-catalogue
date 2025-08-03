@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { API_BASE_URL } from "../config";
-import AdminPage from "./AdminPage";
-import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../api/axiosInstance";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -12,35 +10,21 @@ export default function AdminLogin() {
     setErrMsg("");
     e.preventDefault();
     try {
-      const res = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+      const res = await axiosInstance.post("/auth/login", {
+        username,
+        password,
       });
-
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        data = null; // fallback if not JSON
-      }
-
-      if (!res.ok) {
-        console.error(data.message);
-        setErrMsg(data.message);
-        setUsername("");
-        setPassword("");
-        return;
-      }
+      const data = res.data;
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
 
       window.location.reload();
     } catch (error) {
-      console.error("Failed to login :", error.message);
+      console.error("Failed to login :", error.response?.data || error.message);
+      setErrMsg(error.response?.data?.message || "Login failed");
+      setUsername("");
+      setPassword("");
     }
   };
 

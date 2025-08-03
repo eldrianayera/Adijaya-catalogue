@@ -1,6 +1,6 @@
 import { useProducts } from "./useProducts";
 import { useEffect, useState } from "react";
-import { API_BASE_URL, imgLink } from "../config";
+import { axiosInstance } from "../api/axiosInstance";
 
 export const useAdmin = () => {
   const [
@@ -17,50 +17,40 @@ export const useAdmin = () => {
   ] = useProducts();
 
   const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
 
   const [isValidating, setIsValidating] = useState(true);
   const [isValidAdmin, setIsValidAdmin] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Token and Role Authentication
+  ////////////////// Token and Role Authentication ///////////////////////////////////////////////////////////////
   useEffect(() => {
     const validateToken = async () => {
-      if (!token || role !== "admin") {
+      if (!token || localStorage.getItem("role") !== "admin") {
         setIsValidAdmin(false);
         setIsValidating(false);
         return;
       }
       try {
-        const res = await fetch(`${API_BASE_URL}/auth/validate`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (!res.ok) {
-          const errorText = await res.text();
-          console.error("Failed to Validate :", errorText);
-
-          localStorage.removeItem("token");
-          localStorage.removeItem("role");
-
-          setIsValidating(false);
-          setIsValidAdmin(false);
-
-          return;
-        }
+        const res = await axiosInstance.get("/auth/validate");
+        // If status is not 2xx, axios will throw and jump to catch
 
         setIsValidAdmin(true);
-        setIsValidating(false);
       } catch (error) {
-        console.error("Authentication failed:", error);
+        console.error(
+          "Authentication failed:",
+          error.response?.data || error.message
+        );
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        setIsValidAdmin(false);
+      } finally {
         setIsValidating(false);
       }
     };
-
     validateToken();
-  }, [token, role]);
+  }, [token]);
 
-  // Log out
+  //////// Log out /////////////////////////////////////////////////////////////////////////////////////
   const handleLogOut = () => {
     console.log("Log out");
     localStorage.removeItem("token");
@@ -69,80 +59,43 @@ export const useAdmin = () => {
     window.location.href = "/admin/login";
   };
 
-  // Add new product
+  //////////////////// Add new product ///////////////////////////////////////////////////////////////////////
   const handleAdd = async (newProduct) => {
-    console.log("Add a new product", newProduct);
-
     try {
-      const res = await fetch(`${API_BASE_URL}/admin/products`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(newProduct),
-      });
-
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        data = null; // fallback if not JSON
-      }
-
-      if (!res.ok) {
-        const errorText = data?.message;
-        throw new Error(`Failed to add product: ${errorText}`);
-      }
+      const res = await axiosInstance.post("/admin/products", newProduct);
 
       // Instant update
-      setProducts((prev) => [...prev, data]);
+      setProducts((prev) => [...prev, res.data]);
 
       // Re-fetch in background
       fetchProducts();
       setIsEditing(false);
     } catch (err) {
-      console.error(err);
+      console.error(
+        "Failed to add product:",
+        err.response?.data || err.message
+      );
     }
   };
 
-  // Edit a product
+  /////////////////////////// change Editing state ////////////////////////////////////////////////////
   const handleEdit = (product) => {
     setIsEditing(product);
     return product;
   };
 
-  // handleSaveEdit
+  ///////////////////////// Save edited product //////////////////////////////////////////////////////
   const handleSaveEdit = async (editedProduct) => {
     console.log(editedProduct);
     try {
-      const res = await fetch(
-        `${API_BASE_URL}/admin/products/${editedProduct.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(editedProduct),
-        }
+      const res = await axiosInstance.put(
+        "/admin/products/${editedProduct.id}",
+        editedProduct
       );
-
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        data = null; // fallback if not JSON
-      }
-
-      if (!res.ok) {
-        const errorText = data?.message;
-        throw new Error(`Failed to edit product: ${errorText}`);
-      }
 
       // Instant update
       setProducts((prev) =>
-        prev.map((p) => (p.id === editedProduct.id ? data : p))
+        prev.map((p) => (p.id === editedProduct.id ? res.data : p))
       );
 
       // Re-fetch in background
@@ -150,26 +103,17 @@ export const useAdmin = () => {
 
       setIsEditing(false);
     } catch (err) {
-      console.error(err);
+      console.error(
+        "Failed to edit product:",
+        err.response?.data || err.message
+      );
     }
   };
 
-  // Delete a product
+  /////////// Delete a product ////////////////////////////////////////////////////////////////////////
   const handleDelete = async (id) => {
-    console.log("Delete product", id);
     try {
-      const res = await fetch(`${API_BASE_URL}/admin/products/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Failed to edit product: ${errorText}`);
-      }
+      await axiosInstance.delete(`/admin/products/${id}`);
 
       // Instant Update
       setProducts((prev) => prev.filter((p) => p.id !== id));
@@ -177,7 +121,10 @@ export const useAdmin = () => {
       // Re-fetch in background
       fetchProducts();
     } catch (err) {
-      console.error(err);
+      console.error(
+        "Failed to delete product:",
+        err.response?.data || err.message
+      );
     }
   };
 
