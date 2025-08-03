@@ -87,7 +87,7 @@ export const useAdmin = () => {
 
   ///////////////////////// Save edited product //////////////////////////////////////////////////////
   const handleSaveEdit = async (editedProduct) => {
-    console.log(editedProduct);
+    alert("Product has been Saved");
     try {
       const res = await axiosInstance.put(
         `/admin/products/${editedProduct.id}`,

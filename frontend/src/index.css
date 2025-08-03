@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-secondary: hsl(var(--secondary));
+  --color-card: hsl(var(--card));
+
+  --animate-fade-in: fade-in 0.7s ease-out forwards;
+  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
+  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
+  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
+  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: 222 47% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 222 47% 8%;
+
+    --primary: 250 65% 65%;
+    --secondary: 213 31% 91%;
+
+    --border: 217 33% 20%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@utility text-glow {
+  @apply relative z-30;
+  text-shadow: 0 0 5px rgba(255, 45, 241, 0.6), 0 0 10px rgba(255, 45, 241, 0.7),
+    0 0 20px rgba(255, 45, 241, 0.8), 0 0 40px rgba(255, 45, 241, 0.9);
+}
+
+@utility section-header {
+  @apply text-3xl max-sm:text-2xl font-bold;
+}
+
+@utility card-hover {
+  @apply transition-transform duration-300 hover:scale-[1.07] hover:shadow-lg;
+}
+
+@utility primary-button {
+  @apply px-6 py-2 rounded-full bg-primary text-white font-medium
+           transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
+           hover:scale-105 active:scale-95;
+}
+
+@utility container-glow {
+  @apply shadow-[0_0_30px_hsl(var(--primary))];
+}
+
+@utility container-glow-sm {
+  @apply shadow-[0_0_10px_hsl(var(--primary))];
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
