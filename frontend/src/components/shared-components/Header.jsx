@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 export default function Header(props) {
   return (
-    <header className="flex border-2 items-center h-20 mb-12 fixed w-full text-background bg-foreground justify-evenly">
+    <header className="flex border-2 items-center h-20 mb-12 fixed w-full text-background bg-foreground justify-evenly top-0">
       <a href="/" className="font-bold text-5xl ">
         {props.admin ? "FitWear Admin" : "FitWear"}
       </a>

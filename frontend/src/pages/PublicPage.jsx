@@ -3,6 +3,8 @@ import CardContainer from "../components/shared-components/CardContainer";
 import { useAdmin } from "../hooks/useAdmin";
 import EditProductWindow from "../components/admin-components/EditProductWindow";
 import HeroContainer from "../components/shared-components/HeroContainer";
+import Footer from "../components/shared-components/Footer";
+import Header from "../components/shared-components/Header";
 
 export default function PublicPage() {
   const {
@@ -16,6 +18,7 @@ export default function PublicPage() {
     handleDelete,
     handleEdit,
     handleSaveEdit,
+    handleLogOut,
     isEditing,
     setIsEditing,
   } = useAdmin();
@@ -33,6 +36,8 @@ export default function PublicPage() {
           handleAdd={handleAdd}
         />
       )}
+
+      <Header admin={isValidAdmin} handleLogOut={handleLogOut} />
 
       <main className="px-9 flex flex-col gap-12 pt-30">
         <HeroContainer />
@@ -58,6 +63,7 @@ export default function PublicPage() {
           isValidAdmin={isValidAdmin}
         />
       </main>
+      <Footer />
     </div>
   );
 }

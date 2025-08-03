@@ -1,3 +1,4 @@
+import Footer from "./components/shared-components/Footer";
 import Header from "./components/shared-components/Header";
 import { useAdmin } from "./hooks/useAdmin";
 import AdminLogin from "./pages/AdminLogin";
@@ -10,13 +11,13 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <Header admin={isValidAdmin} handleLogOut={handleLogOut} />
 
         <Routes>
           <Route index element={<PublicPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/product-detail/:id" element={<ProductDetailPage />} />
         </Routes>
+
       </BrowserRouter>
     </>
   );
