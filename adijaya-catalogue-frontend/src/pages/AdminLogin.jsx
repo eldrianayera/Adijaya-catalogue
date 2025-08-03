@@ -19,7 +19,7 @@ export default function AdminLogin() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
 
-      window.location.reload();
+      window.location.href = "/";
     } catch (error) {
       console.error("Failed to login :", error.response?.data || error.message);
       setErrMsg(error.response?.data?.message || "Login failed");

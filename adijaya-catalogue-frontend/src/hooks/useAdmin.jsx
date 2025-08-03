@@ -80,6 +80,7 @@ export const useAdmin = () => {
 
   /////////////////////////// change Editing state ////////////////////////////////////////////////////
   const handleEdit = (product) => {
+    console.log("hai");
     setIsEditing(product);
     return product;
   };
@@ -89,7 +90,7 @@ export const useAdmin = () => {
     console.log(editedProduct);
     try {
       const res = await axiosInstance.put(
-        "/admin/products/${editedProduct.id}",
+        `/admin/products/${editedProduct.id}`,
         editedProduct
       );
 
