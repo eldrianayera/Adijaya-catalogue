@@ -1,5 +1,6 @@
 import cn from "../../lib/utils";
 import NavBar from "./NavBar";
+import SearchBar from "./SearchBar";
 
 export default function Header(props) {
   return (
@@ -8,6 +9,7 @@ export default function Header(props) {
         {props.admin ? "FitWear Admin" : "FitWear"}
       </a>
       <NavBar />
+      <SearchBar />
       <div
         className={cn("absolute right-5 flex gap-4 ", !props.admin && "hidden")}
       >
