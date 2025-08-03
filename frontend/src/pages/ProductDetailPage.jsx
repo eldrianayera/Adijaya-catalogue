@@ -7,21 +7,7 @@ import SingleProductDetail from "../components/shared-components/SingleProductDe
 
 export default function ProductDetailPage() {
   const { id } = useParams();
-  const {
-    isValidAdmin,
-    productById,
-    fetchProductsById,
-    handleLogOut,
-    products,
-  } = useAdmin();
-
-  useEffect(() => {
-    fetchProductsById(id);
-  }, [id]);
-
-  if (!productById) {
-    return <h1>Loading...</h1>;
-  }
+  const { isValidAdmin, handleLogOut, products } = useAdmin();
 
   return (
     <div>
