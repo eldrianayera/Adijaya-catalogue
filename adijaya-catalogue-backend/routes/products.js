@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get products by ID
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query(`SELECT * FROM products WHERE id=$1`, [id]);
