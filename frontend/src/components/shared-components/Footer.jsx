@@ -1,8 +1,10 @@
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <div className="h-20 bg-foreground text-background mt-15 flex items-center justify-center">
-      <h1>Copyright {year} EldriTech</h1>
-    </div>
+    <footer className="h-20 bg-foreground text-background mt-16 flex items-center justify-center px-6">
+      <p className="text-sm font-medium">
+        &copy; {year} EldriTech. All rights reserved.
+      </p>
+    </footer>
   );
 }

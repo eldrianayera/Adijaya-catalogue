@@ -51,142 +51,146 @@ export default function EditProductWindow(props) {
   return (
     <div
       className={cn(
-        // position
-        "top-1/2 -translate-y-1/2  left-1/2 -translate-x-1/2 ",
-        // classname
-        "z-50 fixed border-2 flex flex-col w-[90%] h-[90%] justify-evenly p-3 bg-white"
+        // positioning
+        "fixed left-1/2 top-[calc(50%+2.5rem)] -translate-x-1/2 -translate-y-1/2",
+        // appearance
+        "z-50 w-[90%] h-[90%] bg-white rounded-xl shadow-2xl p-6 flex flex-col justify-between overflow-auto"
       )}
     >
-      <div className="grid grid-cols-[3fr_2fr] px-5">
-        <div className="flex flex-col ">
-          <div className="flex gap-3 items-center">
-            {" "}
-            <label htmlFor="name">Product name : </label>
+      {/* Product form fields */}
+      <div className="grid grid-cols-[3fr_2fr] gap-8">
+        <div className="space-y-5">
+          {/* Product Name */}
+          <div>
+            <label className="block font-semibold mb-1">Product Name</label>
             <input
               type="text"
               value={formData.name}
               name="name"
-              placeholder="Product name..."
-              className="p-2 border-2 grow"
+              placeholder="Enter product name..."
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary outline-none"
               required
-              onChange={(e) => {
-                handleUpdate(e);
-              }}
+              onChange={handleUpdate}
             />
           </div>
-          <div className="flex gap-3 items-center">
-            {" "}
-            <label htmlFor="name"> price : </label>
+
+          {/* Price */}
+          <div>
+            <label className="block font-semibold mb-1">Price</label>
             <input
               type="text"
               value={formData.price}
               name="price"
-              placeholder="Product price..."
-              className="p-2 border-2 grow"
+              placeholder="Enter product price..."
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary outline-none"
               required
-              onChange={(e) => {
-                handleUpdate(e);
-              }}
+              onChange={handleUpdate}
             />
           </div>
 
-          <div className="flex gap-3 items-center ">
-            {" "}
-            <label htmlFor="name">Category : </label>
-            <select
-              onChange={handleUpdate}
-              name="category"
-              id="category"
-              value={formData.category}
-              className="h-12 border-2 grow"
-            >
-              <option value="" disabled>
-                -- Select category --
-              </option>
-              {props.category
-                .filter((categ) => categ !== "All")
-                .map((categ, key) => {
-                  return (
+          {/* Category */}
+          <div>
+            <label className="block font-semibold mb-1">Category</label>
+            <div className="flex gap-3">
+              <select
+                onChange={handleUpdate}
+                name="category"
+                value={formData.category}
+                className="flex-grow p-3 border rounded-lg focus:ring-2 focus:ring-primary outline-none"
+              >
+                <option value="" disabled>
+                  -- Select category --
+                </option>
+                {props.category
+                  .filter((categ) => categ !== "All")
+                  .map((categ, key) => (
                     <option key={key} value={categ}>
                       {categ}
                     </option>
-                  );
-                })}
-              {formData.category &&
-                !props.category.includes(formData.category) && (
-                  <option value={formData.category}>{formData.category}</option>
-                )}
-            </select>
-            <input
-              type="text"
-              placeholder="Add new category..."
-              className="focus:outline-hidden"
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, category: e.target.value }))
-              }
-            />
+                  ))}
+                {formData.category &&
+                  !props.category.includes(formData.category) && (
+                    <option value={formData.category}>
+                      {formData.category}
+                    </option>
+                  )}
+              </select>
+              <input
+                type="text"
+                placeholder="New category..."
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    category: e.target.value,
+                  }))
+                }
+              />
+            </div>
           </div>
 
-          <div className="flex gap-3 items-center">
-            {" "}
-            <label htmlFor="name">Image : </label>
+          {/* Image */}
+          <div>
+            <label className="block font-semibold mb-1">Image URL</label>
             <input
               type="text"
               value={formData.image}
               name="image"
-              placeholder="Product image..."
-              className="p-2 border-2 grow"
-              onChange={(e) => {
-                handleUpdate(e);
-              }}
+              placeholder="Paste image URL..."
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary outline-none"
+              onChange={handleUpdate}
             />
           </div>
 
-          <div className="flex gap-3 items-center">
-            {" "}
-            <label htmlFor="name">Description : </label>
-            <input
-              type="text"
+          {/* Description */}
+          <div>
+            <label className="block font-semibold mb-1">Description</label>
+            <textarea
               value={formData.description}
               name="description"
-              placeholder="escription..."
-              className="p-2 border-2 grow"
-              onChange={(e) => {
-                handleUpdate(e);
-              }}
-            />
+              placeholder="Enter product description..."
+              rows="3"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary outline-none"
+              onChange={handleUpdate}
+            ></textarea>
           </div>
         </div>
 
-        <div className="border-2 mx-auto">
+        {/* Product Image Preview */}
+        <div className="flex items-center justify-center border rounded-lg overflow-hidden">
           {formData.image ? (
-            <img src={formData.image} alt={formData.name} width={400} />
+            <img
+              src={formData.image}
+              alt={formData.name}
+              className="object-cover w-full h-full"
+            />
           ) : (
-            <div className="w-[400px] h-[300px] flex items-center justify-center bg-gray-100 text-gray-500">
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
               No image
             </div>
           )}
         </div>
       </div>
-      <div className="self-end">
-        {" "}
+
+      {/* Action buttons */}
+      <div className="flex justify-end gap-4 mt-6">
         <button
           onClick={() => props.setIsEditing(false)}
-          className="m-3 border-2 p-2"
+          className="px-5 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
         >
           Cancel
         </button>
         {editOrAdd === "edit" ? (
           <button
             onClick={() => props.handleSaveEdit(formData)}
-            className="m-3 border-2 p-2"
+            className="px-5 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors"
           >
             Save
           </button>
         ) : (
           <button
             onClick={() => handleClickAdd(formData)}
-            className="m-3 border-2 p-2"
+            className="px-5 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors"
           >
             Add
           </button>

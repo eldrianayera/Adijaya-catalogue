@@ -52,10 +52,12 @@ export default function PublicPage() {
           fetchProducts={fetchProducts}
         />
         {isValidAdmin && (
-          <div>
-            {" "}
-            <button onClick={() => handleEdit({})} className="border-2 px-1 ">
-              Add a New Product
+          <div className="flex justify-center my-6">
+            <button
+              onClick={() => handleEdit({})}
+              className="px-5 py-2 rounded-lg bg-primary text-white font-semibold shadow-sm hover:shadow-md hover:bg-primary/10 hover:text-primary transition-all duration-200"
+            >
+              ➕ Add a New Product
             </button>
           </div>
         )}

@@ -32,33 +32,47 @@ export default function AdminLogin() {
   return (
     <div>
       <Header />
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center min-h-[calc(100vh-5rem)] px-4">
         <form
-          className="flex flex-col p-5 gap-2 w-120 border-2"
+          className="flex flex-col gap-4 w-full max-w-md p-8 border-2 rounded-lg shadow-md bg-white"
           onSubmit={handleSubmit}
         >
-          <p className="text-red-600">{errMsg}</p>
-          <label htmlFor="username">Username :</label>
+          {errMsg && (
+            <p className="text-red-600 font-semibold text-center">{errMsg}</p>
+          )}
+
+          <label htmlFor="username" className="font-medium">
+            Username
+          </label>
           <input
             onChange={(e) => setUsername(e.target.value)}
             type="text"
             name="username"
             id="username"
-            placeholder="username"
-            className="border-2 p-2"
+            placeholder="Enter your username"
+            className="border-2 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary"
             value={username}
+            required
           />
-          <label htmlFor="password">Username :</label>
+
+          <label htmlFor="password" className="font-medium">
+            Password
+          </label>
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             name="password"
             id="password"
-            placeholder="password"
-            className="border-2 p-2"
+            placeholder="Enter your password"
+            className="border-2 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary"
             value={password}
+            required
           />
-          <button type="submit" className="border-2 w-20 mx-auto p-1">
+
+          <button
+            type="submit"
+            className="mt-4 bg-primary text-white rounded-md py-2 font-semibold hover:bg-primary/90 transition-colors"
+          >
             Login
           </button>
         </form>
