@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import CardContainer from "../components/shared-components/CardContainer";
-import { useProducts } from "../hooks/useProducts";
 import { useEffect } from "react";
 import { axiosInstance } from "../api/axiosInstance";
 import { useAdmin } from "../hooks/useAdmin";
+import Header from "../components/shared-components/Header";
 
 export default function SearchResultsPage() {
   const {
@@ -13,6 +13,7 @@ export default function SearchResultsPage() {
     handleDelete,
     handleEdit,
     isValidAdmin,
+    handleLogOut,
   } = useAdmin();
   const { search } = useParams();
 
@@ -23,8 +24,6 @@ export default function SearchResultsPage() {
       try {
         const res = await axiosInstance.get(`/products/search/${search}`);
         setProducts(res.data);
-        console.log("ok");
-        console.log(res.data);
       } catch (err) {
         console.error(
           "Failed to search product:",
@@ -34,15 +33,24 @@ export default function SearchResultsPage() {
     };
 
     fetchProducts();
-  }, [search, setProducts]);
+  }, [products]);
 
   return (
-    <CardContainer
-      products={products}
-      handleAdd={handleAdd}
-      handleDelete={handleDelete}
-      handleEdit={handleEdit}
-      isValidAdmin={isValidAdmin}
-    />
+    <div className="page">
+      <Header admin={isValidAdmin} handleLogOut={handleLogOut} />
+      <div className="px-[20%] m-10">
+        <div className="text-xl">Results :</div>
+        <div className="text-3xl font-bold">
+          "{search}" ({products.length})
+        </div>
+      </div>
+      <CardContainer
+        products={products}
+        handleAdd={handleAdd}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        isValidAdmin={isValidAdmin}
+      />
+    </div>
   );
 }

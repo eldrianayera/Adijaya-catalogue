@@ -6,7 +6,9 @@ import { useProducts } from "../../hooks/useProducts";
 export default function SearchBar() {
   const [search, setSearch] = useState("");
 
-  const handleClickSearch = async (e) => {
+  const handleClickSearch = (e) => {
+    e.preventDefault();
+    console.log(search);
     window.location.href = `/search/${search}`;
   };
 

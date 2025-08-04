@@ -42,7 +42,7 @@ export default function PublicPage() {
 
       <Header admin={isValidAdmin} handleLogOut={handleLogOut} />
 
-      <main className="flex flex-col pt-20">
+      <main className="page">
         <HeroContainer1 />
         <HeroContainer2 />
         <About />

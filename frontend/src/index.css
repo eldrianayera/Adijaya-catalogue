@@ -33,7 +33,7 @@
 
     --card: rgba(11, 16, 26, 1);
 
-    --primary: rgba(90, 153, 0, 1);
+    --primary: rgb(124, 199, 19);
     --secondary: rgba(232, 236, 242, 1);
 
     --border: rgba(34, 45, 61, 1);
@@ -72,6 +72,10 @@
   @media (width >= 1400px) {
     max-width: 1400px;
   }
+}
+
+@utility page {
+  @apply flex flex-col mt-20;
 }
 
 @utility md-only {

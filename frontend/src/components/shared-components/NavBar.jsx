@@ -1,9 +1,9 @@
 export default function NavBar() {
   const navItem = [
-    { name: "Home", href: "#hero" },
-    { name: "About", href: "#about" },
-    { name: "Product", href: "#product" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#hero" },
+    { name: "About", href: "/#about" },
+    { name: "Product", href: "/#product" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (

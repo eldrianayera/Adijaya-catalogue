@@ -8,7 +8,7 @@ export default function ProductDetailPage() {
   const { isValidAdmin, handleLogOut, products } = useAdmin();
 
   return (
-    <div className="px-9 flex flex-col gap-12 mt-30">
+    <div className="page">
       <Header admin={isValidAdmin} handleLogOut={handleLogOut} />
       <SingleProductDetail />
       <CardContainer products={products} isValidAdmin={isValidAdmin} />
