@@ -1,22 +1,44 @@
-import cn from "../../lib/utils";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 
 export default function Header(props) {
   return (
-    <header className="flex  items-center h-20 mb-12 fixed w-full justify-evenly top-0 z-50 bg-background">
-      <a href="/" className="font-bold text-5xl text-primary">
+    <header
+      className="
+        fixed top-0 w-full h-20 z-50 flex items-center justify-between
+        bg-background px-8 shadow-md
+      "
+      role="banner"
+    >
+      <a
+        href="/"
+        className="font-extrabold text-4xl text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        tabIndex={0}
+      >
         {props.admin ? "FitWear Admin" : "FitWear"}
       </a>
-      <NavBar />
+
+      <nav className="flex-1 mx-12">
+        <NavBar />
+      </nav>
+
       <SearchBar />
-      <div
-        className={cn("absolute right-5 flex gap-4 ", !props.admin && "hidden")}
-      >
-        <button onClick={props.handleLogOut} className="border-2 p-1">
-          Log out
-        </button>
-      </div>
+
+      {props.admin && (
+        <div className="ml-6">
+          <button
+            onClick={props.handleLogOut}
+            className="
+              border-2 border-primary px-4 py-1 rounded-md text-primary
+              font-semibold hover:bg-primary hover:text-white transition-colors duration-200
+              focus:outline-none focus:ring-2 focus:ring-primary
+            "
+            aria-label="Log out"
+          >
+            Log out
+          </button>
+        </div>
+      )}
     </header>
   );
 }
