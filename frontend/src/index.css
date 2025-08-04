@@ -74,6 +74,10 @@
   }
 }
 
+@utility poppins {
+  font-family: "Poppins";
+}
+
 @utility page {
   @apply flex flex-col mt-20;
 }
