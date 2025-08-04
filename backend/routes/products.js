@@ -53,7 +53,7 @@ router.get("/search/:search", async (req, res) => {
     const { search } = req.params;
     const result = await pool.query(
       `SELECT * FROM products WHERE name ILIKE $1`,
-      [search]
+      [`%${search}%`]
     );
     if (result.rows.length === 0) {
       return res.status(404).json({ message: "Product not found" });

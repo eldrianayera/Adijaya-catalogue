@@ -1,13 +1,13 @@
 import { Search } from "lucide-react";
 import { useState } from "react";
 import { axiosInstance } from "../../api/axiosInstance";
+import { useProducts } from "../../hooks/useProducts";
 
 export default function SearchBar() {
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState("");
 
   const handleClickSearch = async (e) => {
-    e.preventDefault();
-    const res = await axiosInstance.get("products")
+    window.location.href = `/search/${search}`;
   };
 
   return (
