@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 
 export default function Header(props) {
   return (
-    <header className="flex border-2 items-center h-20 mb-12 fixed w-full  bg-foreground justify-evenly top-0 z-50 ">
+    <header className="flex  items-center h-20 mb-12 fixed w-full justify-evenly top-0 z-50 bg-background">
       <a href="/" className="font-bold text-5xl text-primary">
         {props.admin ? "FitWear Admin" : "FitWear"}
       </a>

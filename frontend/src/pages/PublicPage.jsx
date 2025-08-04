@@ -42,7 +42,7 @@ export default function PublicPage() {
 
       <Header admin={isValidAdmin} handleLogOut={handleLogOut} />
 
-      <main className="px-9 flex flex-col gap-12 pt-30">
+      <main className="flex flex-col pt-20">
         <HeroContainer1 />
         <HeroContainer2 />
         <About />
