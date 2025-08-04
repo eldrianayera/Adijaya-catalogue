@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAdmin } from "../../hooks/useAdmin";
+import { Home, HomeIcon } from "lucide-react";
 
 export default function SingleProductDetail() {
   const { id } = useParams();
@@ -56,81 +57,99 @@ export default function SingleProductDetail() {
   }
 
   return (
-    <div className="max-w-6xl flex flex-col mx-auto border-8">
-      <div className="">
-        <a href="/" className="border-2">
-          Home
+    <div className="max-w-6xl mx-auto border-4 rounded-lg overflow-hidden bg-white shadow-lg m-10">
+      <div className="p-4 border-b bg-white ">
+        <a
+          href="/"
+          className="
+      inline-block
+      border-2 border-primary
+      text-primary font-semibold
+      px-4 py-1 rounded-md
+      hover:bg-primary hover:text-white
+      transition-colors duration-200
+      focus:outline-none focus:ring-2 focus:ring-primary
+    "
+        >
+          <Home />
         </a>
       </div>
-      <div className="flex">
-        <div className="image-container w-100">
+
+      <div className="flex flex-col md:flex-row gap-10 p-10">
+        {/* Image Container */}
+        <div className="flex-shrink-0 w-full md:w-96 h-72 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
           {formData.image ? (
             <img
               src={formData.image}
               alt={formData.name}
-              className="object-cover"
+              className="object-cover w-full h-full"
             />
           ) : (
             <div className="text-gray-400 text-sm">No image</div>
           )}
         </div>
-        <div className="m-10 flex flex-col gap-5">
+
+        {/* Details Form */}
+        <div className="flex flex-col flex-grow gap-6">
           <input
-            className="text-4xl font-bold focus:outline-hidden"
+            className="text-4xl font-bold border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm p-1"
             value={formData.name}
             name="name"
             onChange={canEdit ? handleChange : undefined}
             readOnly={!canEdit}
           />
-          <div>
-            <label className="text-4xl font-bold " htmlFor="price">
+
+          <div className="flex items-center gap-2">
+            <label className="text-4xl font-bold select-none" htmlFor="price">
               Rp
             </label>
             <input
-              className="text-4xl font-bold focus:outline-hidden"
+              id="price"
+              className="text-4xl font-bold border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm p-1 flex-grow"
               value={formData.price}
               name="price"
               readOnly={!canEdit}
               onChange={canEdit ? handleChange : undefined}
+              type="number"
+              min="0"
             />
           </div>
+
           <input
-            className="text-sm text-gray-600 focus:outline-hidden"
+            className="text-sm text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm p-1"
             value={formData.category}
             name="category"
             readOnly={!canEdit}
             onChange={canEdit ? handleChange : undefined}
           />
+
           <textarea
             value={formData.description}
             name="description"
-            className="resize-none focus:outline-hidden w-160"
+            className="resize-none border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary min-h-[80px]"
             readOnly={!canEdit}
             onChange={canEdit ? handleChange : undefined}
-            style={{
-              fieldSizing: "content",
-              minHeight: "2.5rem",
-            }}
           />
 
           {isValidAdmin && (
-            <div className="self-end gap-4 flex">
+            <div className="self-end flex gap-4 mt-4">
               <button
-                onClick={() => {
-                  handleDelete(id);
-                }}
-                className="border-2 p-1"
+                onClick={() => handleDelete(id)}
+                className="border-2 border-red-500 text-red-500 px-4 py-1 rounded-md hover:bg-red-500 hover:text-white transition-colors"
               >
                 Delete
               </button>
               {isEditingSingleProduct ? (
-                <button onClick={handleClickSave} className="border-2 p-1">
+                <button
+                  onClick={handleClickSave}
+                  className="border-2 border-primary text-primary px-4 py-1 rounded-md hover:bg-primary hover:text-white transition-colors"
+                >
                   Save
                 </button>
               ) : (
                 <button
                   onClick={() => setIsEditingSingleProduct(true)}
-                  className="border-2 p-1"
+                  className="border-2 border-primary text-primary px-4 py-1 rounded-md hover:bg-primary hover:text-white transition-colors"
                 >
                   Edit
                 </button>
