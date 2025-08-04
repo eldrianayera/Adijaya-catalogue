@@ -47,4 +47,22 @@ router.get("/category/:category", async (req, res) => {
   }
 });
 
+// Get products by name
+router.get("/search/:search", async (req, res) => {
+  try {
+    const { search } = req.params;
+    const result = await pool.query(
+      `SELECT * FROM products WHERE name ILIKE $1`,
+      [search]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

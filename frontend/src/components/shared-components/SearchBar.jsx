@@ -1,13 +1,21 @@
 import { Search } from "lucide-react";
 import { useState } from "react";
+import { axiosInstance } from "../../api/axiosInstance";
 
 export default function SearchBar() {
   const [search, setSearch] = useState(null);
 
-  const handleSearch = (e) => {};
+  const handleClickSearch = async (e) => {
+    e.preventDefault();
+    const res = await axiosInstance.get("products")
+  };
 
   return (
-    <div className="flex items-center border-2 rounded-lg pr-2">
+    <form
+      className="flex items-center border-2 rounded-lg pr-2"
+      onSubmit={(e) => handleClickSearch(e)}
+    >
+      {" "}
       <input
         className="w-55 px-4 py-1 bg-background rounded-xl focus:outline-hidden"
         placeholder="Search..."
@@ -15,7 +23,9 @@ export default function SearchBar() {
           setSearch(e.target.value);
         }}
       ></input>
-      <Search className="text-foreground" />
-    </div>
+      <button type="submit">
+        <Search className="text-foreground" />
+      </button>
+    </form>
   );
 }
