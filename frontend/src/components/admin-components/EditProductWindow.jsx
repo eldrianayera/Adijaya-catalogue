@@ -40,6 +40,14 @@ export default function EditProductWindow(props) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleClickAdd = (formData) => {
+    if (!formData.name || !formData.price) {
+      alert("Name and Price can't be empty");
+      return;
+    }
+    props.handleAdd(formData);
+  };
+
   return (
     <div
       className={cn(
@@ -177,7 +185,7 @@ export default function EditProductWindow(props) {
           </button>
         ) : (
           <button
-            onClick={() => props.handleAdd(formData)}
+            onClick={() => handleClickAdd(formData)}
             className="m-3 border-2 p-2"
           >
             Add

@@ -80,7 +80,6 @@ export const useAdmin = () => {
 
   /////////////////////////// change Editing state ////////////////////////////////////////////////////
   const handleEdit = (product) => {
-    console.log("hai");
     setIsEditing(product);
     return product;
   };

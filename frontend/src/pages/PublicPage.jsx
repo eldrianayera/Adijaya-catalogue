@@ -54,7 +54,7 @@ export default function PublicPage() {
         {isValidAdmin && (
           <div>
             {" "}
-            <button onClick={handleAdd} className="border-2 px-1">
+            <button onClick={() => handleEdit({})} className="border-2 px-1 ">
               Add a New Product
             </button>
           </div>
