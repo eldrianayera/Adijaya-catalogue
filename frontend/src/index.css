@@ -28,6 +28,18 @@
 
 @layer base {
   :root {
+    --background: 213 31% 91%;
+    --foreground: 222 47% 4%;
+
+    --card: 222 47% 8%;
+
+    --primary: 76, 100%, 30%;
+    --secondary: 213 31% 91%;
+
+    --border: 217 33% 20%;
+  }
+
+  :dark {
     --background: 222 47% 4%;
     --foreground: 213 31% 91%;
 

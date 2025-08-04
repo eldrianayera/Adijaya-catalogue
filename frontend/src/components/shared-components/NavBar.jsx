@@ -8,8 +8,8 @@ export default function NavBar() {
 
   return (
     <nav className="flex gap-3 text-background lg-only">
-      {navItem.map((item) => (
-        <a className="hover:text-primary" href={item.href}>
+      {navItem.map((item, key) => (
+        <a key={key} className="hover:text-primary" href={item.href}>
           {item.name}
         </a>
       ))}

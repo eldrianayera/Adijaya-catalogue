@@ -1,7 +1,11 @@
 export default function HeroContainer1() {
   return (
-    <div className="border-2 text-center h-80 scroll-mt-30" id="hero">
-      HERO SECTION
-    </div>
+    <section id="hero" className="relative border-2 text-center scroll-mt-30 rounded-2xl">
+      <img
+        src="hero2.png"
+        alt="Sport apparel hero banner"
+        className="w-full h-auto object-cover rounded-2xl"
+      />
+    </section>
   );
 }
