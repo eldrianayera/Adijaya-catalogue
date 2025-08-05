@@ -23,7 +23,7 @@ export default function ProductsCards({ product }) {
           {product.name}
         </h3>
         <p className="text-gray-700 font-medium mt-1">
-          Rp{Number(product.price).toLocaleString()}
+          ${Number(product.price).toLocaleString()}
         </p>
       </div>
     </a>
