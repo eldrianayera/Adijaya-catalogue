@@ -5,6 +5,7 @@ require("dotenv").config();
 const productsRouter = require("./routes/products");
 const authRouter = require("./routes/auth"); //
 const adminRouter = require("./routes/admin");
+const uploadRouter = require("./routes/upload");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -17,6 +18,7 @@ app.use(express.json()); // Parse JSON request bodies
 app.use("/api/products", productsRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/upload", uploadRouter);
 
 // Start server
 app.listen(PORT, () => {
