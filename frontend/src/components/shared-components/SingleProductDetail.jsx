@@ -94,7 +94,6 @@ export default function SingleProductDetail() {
           <input
             className="text-4xl font-bold border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm p-1"
             value={formData.name}
-            placeholder="Product..."
             name="name"
             onChange={canEdit ? handleChange : undefined}
             readOnly={!canEdit}
@@ -108,7 +107,6 @@ export default function SingleProductDetail() {
               id="price"
               className="text-4xl font-bold border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm p-1 flex-grow"
               value={formData.price}
-              placeholder="Price..."
               name="price"
               readOnly={!canEdit}
               onChange={canEdit ? handleChange : undefined}
@@ -120,19 +118,14 @@ export default function SingleProductDetail() {
           <input
             className="text-sm text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm p-1"
             value={formData.category}
-            placeholder="Category..."
             name="category"
             readOnly={!canEdit}
             onChange={canEdit ? handleChange : undefined}
           />
 
-          <input type="file"  />
-
-
           <textarea
             value={formData.description}
             name="description"
-            placeholder="Product description ..."
             className="resize-none border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary min-h-[80px]"
             readOnly={!canEdit}
             onChange={canEdit ? handleChange : undefined}

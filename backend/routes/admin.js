@@ -1,5 +1,4 @@
 const express = require("express");
-const upload = require("./upload");
 const router = express.Router();
 const pool = require("../db");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
@@ -56,15 +55,6 @@ router.delete("/products/:id", async (req, res) => {
     console.error(err.message);
     res.status(500).send("Server error");
   }
-});
-
-router.post("/upload", upload.single("image"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
-  }
-
-  const imagePath = `/products_image/${req.file.filename}`;
-  res.json({ success: true, imagePath });
 });
 
 module.exports = router;

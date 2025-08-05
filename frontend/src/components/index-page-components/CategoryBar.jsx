@@ -18,7 +18,7 @@ export default function CategoryBar(props) {
 
   return (
     <div
-      className="flex justify-center gap-4 flex-wrap scroll-mt-30 py-6 px-9"
+      className="flex justify-center gap-4 flex-wrap scroll-mt-30 py-6"
       id="product"
     >
       {props.category.map((categ, key) => (
