@@ -24,7 +24,7 @@ export default function EditProductWindow(props) {
       setFormData({
         name: product.name || "",
         price: product.price || "",
-        image: null,
+        image: product.image || null,
         imagePreview: typeof product.image === "string" ? product.image : "",
         description: product.description || "",
         category: product.category || "",

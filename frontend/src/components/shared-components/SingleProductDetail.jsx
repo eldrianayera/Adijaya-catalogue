@@ -126,6 +126,9 @@ export default function SingleProductDetail() {
             onChange={canEdit ? handleChange : undefined}
           />
 
+          <input type="file"  />
+
+
           <textarea
             value={formData.description}
             name="description"
