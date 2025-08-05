@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import cn from "../../lib/utils";
+import { LocateFixed } from "lucide-react";
 
 export default function EditProductWindow(props) {
   const product = props.product;
@@ -7,7 +8,8 @@ export default function EditProductWindow(props) {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
-    image: "",
+    image: null,
+    imagePreview: "",
     description: "",
     category: "",
     id: "",
@@ -22,7 +24,8 @@ export default function EditProductWindow(props) {
       setFormData({
         name: product.name || "",
         price: product.price || "",
-        image: product.image || "",
+        image: null,
+        imagePreview: typeof product.image === "string" ? product.image : "",
         description: product.description || "",
         category: product.category || "",
         id: product.id || "",
@@ -133,12 +136,20 @@ export default function EditProductWindow(props) {
           <div>
             <label className="block font-semibold mb-1">Image URL</label>
             <input
-              type="text"
-              value={formData.image}
-              name="image"
-              placeholder="Paste image URL..."
+              type="file"
+              accept="image/*"
               className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary outline-none"
-              onChange={handleUpdate}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                console.log(file);
+                if (file) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    image: file,
+                    imagePreview: URL.createObjectURL(file),
+                  }));
+                }
+              }}
             />
           </div>
 
@@ -158,9 +169,9 @@ export default function EditProductWindow(props) {
 
         {/* Product Image Preview */}
         <div className="flex items-center justify-center border rounded-lg overflow-hidden">
-          {formData.image ? (
+          {formData.imagePreview ? (
             <img
-              src={formData.image}
+              src={formData.imagePreview}
               alt={formData.name}
               className="object-cover w-full h-full"
             />
