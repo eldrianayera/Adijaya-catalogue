@@ -134,7 +134,7 @@ export default function EditProductWindow(props) {
 
           {/* Image */}
           <div>
-            <label className="block font-semibold mb-1">Image URL</label>
+            <label className="block font-semibold mb-1">Product Image</label>
             <input
               type="file"
               accept="image/*"
